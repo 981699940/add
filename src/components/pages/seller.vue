@@ -3,11 +3,10 @@
     
   </div> -->
   <div>
-    <div class="btn-audio" @click="play">
-      <audio id="audio" controls>
+    <div class="btn-audio" @click="play"></div>
+      <audio id="audio">
         <source :src="url">
       </audio>
-    </div>
   </div>
 </template>
 <script>
@@ -22,27 +21,23 @@ export default {
   methods: {
     play() {
       var audio = document.querySelector("#audio");
-      if (!this.isPlaying) {
-        audio.play();
-      }
+        if(audio.paused){
+          audio.play();
+        }else{
+          audio.pause();
+        }
     },
-    stop() {
-      var audio = document.querySelector("#audio");
-      if (this.isPlaying) {
-        audio.pause();
-        audio.currenTime = 0;
-      }
-    }
+    
   }
 };
 </script>
 <style>
 .btn-audio{
         margin: 90px auto;
-        width: 186px;
-        height: 186px;
-        /* background:url(images/voice_stop.png) no-repeat center bottom;
-        background-size:cover; */
-        background: #000
+        width: 150px;
+        height: 32px;
+        background:url(../../assets/img-voice.png) no-repeat ;
+        background-size:100% 100%;
     }
 </style>
+
