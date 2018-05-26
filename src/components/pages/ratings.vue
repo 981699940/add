@@ -1,14 +1,13 @@
 <template>
-  <div>{{this.$route.path}}
-      <template v-for="item in list" >
-          <ul>
+    <div>{{this.$route.path}}
+        <template v-for="item in list">
+            <ul>
                 <!-- :class="classA ? 'class-a' : 'class-b' " -->
-
-              <li :class="{'line': (item.message==='hello')}" >{{item.message==="hello"}}</li>
-              <!-- <li :class="['line-last-'+item.message]" >{{item.message}}</li> -->
-          </ul>
-      </template>
-  </div>
+                <li :class="{'line': (item.message==='hello')}">{{item.message==="hello"}}</li>
+                <!-- <li :class="['line-last-'+item.message]" >{{item.message}}</li> -->
+            </ul>
+        </template>
+    </div>
 </template>
 <script>
 export default {

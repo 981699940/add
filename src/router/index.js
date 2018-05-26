@@ -1,43 +1,46 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Index from '@/components/index'
-import Goods from '../components/pages/goods'
-import Ratings from '../components/pages/ratings'
-import Seller from '../components/pages/seller'
-// import Pages from '../components/pages'
+import Vue from "vue";
+import Router from "vue-router";
+import Index from "@/views/index";
+import Intro from "@/views/intro";
+import Goods from "../components/pages/goods";
+import Ratings from "../components/pages/ratings";
+import Seller from "../components/pages/seller";
+import ToRight from "../components/pages/to-right";
+import ToLeft from "../components/pages/to-left";
+import ToCenter from "../components/pages/to-center";
+import Position from "../components/pages/position";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   routes: [
+    { path: "/", redirect: { path: "/intro" } },
     {
-      path: '/index',
-      name: 'Index',
+      path: "/index",
+      redirect: { path: "/index/goods" },
+      name: "Index",
       component: Index,
       children: [
-        {
-          path: '/pages/goods',
-          component: Goods
-        },
-        {
-          path: '/pages/ratings',
-          component: Ratings
-        },
-        {
-          path: '/pages/seller',
-          component: Seller
-        }
-        // {
-        //   path: "/pages/:id",
-        //   component: Pages
-        // }
-
+        { path: "goods", component: Goods },
+        { path: "ratings", component: Ratings },
+        { path: "seller", component: Seller },
       ]
     },
-    {
-      path: '/',
-      redirect: '/index'
-    }
+    { path: "/intro", component: Intro }
   ]
-})
+});
+//   children: [
+//     {
+//       path: "left",
+//       component: ToLeft
+//     },
+//     {
+//         path: "center",
+//         component: ToCenter
+//       },
+//       {
+//         path: "right",
+//         component: ToRight
+//       }
+//   ]

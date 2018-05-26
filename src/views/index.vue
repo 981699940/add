@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
     <div>
-      <router-link to="/pages/goods">goods</router-link>
-      <router-link to="/pages/seller">seller</router-link>
-      <router-link to="/pages/ratings">ratings</router-link>
+      <router-link to="goods">goods</router-link>
+      <router-link to="seller">seller</router-link>
+      <router-link to="ratings">ratings</router-link>
     </div>
     <router-view></router-view>
   </div>
