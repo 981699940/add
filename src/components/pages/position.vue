@@ -3,7 +3,7 @@
         <template v-if="currentPage ==1">
             <div class="time-set">
                 <span>{{time}}</span>
-                <span class="button-start" @click="runTime">开始</span>
+                <span class="button-start" @click.stop="runTime">开始</span>
             </div>
         </template>
         <template v-if="currentPage ==2">
@@ -31,11 +31,20 @@ export default {
         this.currentPage = this.$route.query.position | 0;
     },
     methods: {
-        runTime(){
-
-        //     let  = ()=>{
-   
-        //    }
+        runTime() {
+            let countdown = () => {
+                if (this.time !== -1) {
+                    this.flag = setTimeout(() => {
+                        this.time--;
+                        countdown();
+                    }, 1000);
+                } else {
+                    this.time = 60;
+                    clearTimeout(this.flag);
+                }
+            };
+            
+            countdown();
         }
     }
 };

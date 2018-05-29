@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Index from "@/views/index";
 import Intro from "@/views/intro";
+import Login from "@/views/login";
 import Goods from "../components/pages/goods";
 import Ratings from "../components/pages/ratings";
 import Seller from "../components/pages/seller";
@@ -27,7 +28,8 @@ export default new Router({
         { path: "seller", component: Seller },
       ]
     },
-    { path: "/intro", component: Intro }
+    { path: "/intro", component: Intro },
+    { path: "/login", component: Login }
   ]
 });
 //   children: [
