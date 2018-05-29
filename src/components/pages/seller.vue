@@ -49,7 +49,7 @@ export default {
 .btn-audio {
     width: 110px;
     height: 32px;
-    background: url(../../assets/img-voice.png) no-repeat;
+    background: url(../../assets/img/img-voice.png) no-repeat;
     background-size: 100% 100%;
 }
 </style>
