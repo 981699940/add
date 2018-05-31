@@ -3,8 +3,8 @@
         <div class="login-header">
             <div class="header-content">
 
-                <img class="brand" src="../assets/img/icon-brand.png">
-                <span>首页</span>
+                <img class="brand" src="../assets/img/icon-brand.png" @click="goIndex">
+                <span @click="goIndex">首页</span>
             </div>
 
         </div>
@@ -13,7 +13,7 @@
                 <div class="login-title">
                     <span class="title">注册</span>
                     <span class="register">已有账号?
-                        <span>快捷登录</span>
+                        <span @click="goLogin">快捷登录</span>
                     </span>
                 </div>
                 <div class="login-input">
@@ -31,8 +31,13 @@
 
                 </div>
                 <div class="login-forget">
-                    <input type="checkbox">
-                    <span class="forget">我已经阅读并同意 <span>《业内人平台协议》</span></span>
+                    <div class="absolute">
+                        <input type="checkbox">
+                    </div>
+
+                    <span class="forget">我已经阅读并同意
+                        <a target="_blank" href="http://static.innotick.com/smartwork/file/a34010326904b2366cc857c8261277b191d4f1cc53cc35b5fa489e31ff22a50e.docx">《业内人平台协议》</a>
+                    </span>
                 </div>
 
             </div>
@@ -61,6 +66,14 @@
 export default {
     data() {
         return {};
+    },
+    methods: {
+        goLogin() {
+            this.$router.push(`/login`);
+        },
+        goIndex() {
+            this.$router.push(`/layout`);
+        }
     }
 };
 </script>
@@ -76,11 +89,12 @@ export default {
         .header-content {
             display: flex;
             margin: 0 auto;
-            width: 60%;
+            min-width: 1130px;
             justify-content: space-between;
             .brand {
                 width: 121px;
                 height: 30px;
+                cursor: pointer;
             }
             span {
                 font-size: 16px;
@@ -93,10 +107,12 @@ export default {
         widows: 100%;
         padding-top: 80px;
         background: #f1f4f8;
-        height: 765px;
+        // height: 765px;
+        min-height: 765px;
+        height: 75vh;
         .container-content {
             margin: 0 auto;
-            width: 30%;
+            width: 500px;
             height: 550px;
             padding: 40px;
             background: #fff;
@@ -155,6 +171,7 @@ export default {
                         text-align: center;
                         overflow: hidden;
                         white-space: nowrap;
+                        cursor: pointer;
                     }
                 }
             }
@@ -178,11 +195,22 @@ export default {
                 margin-top: 20px;
                 justify-content: center;
                 align-items: center;
+                .absolute {
+                    position: relative;
+                    width: 0;
+                    height: 0;
+                    top: -5px;
+                    input{
+                        position: absolute;
+                        width: 130px;
+
+                    }
+                }
                 .forget {
                     font-size: 14px;
                     color: #7f8d9a;
-                    margin-left: 6px;
-                    span{
+                    margin-left: 20px;
+                    a {
                         font-size: 14px;
                         color: #23abe2;
                         cursor: pointer;
@@ -214,10 +242,13 @@ export default {
         padding-top: 70px;
         padding-bottom: 40px;
         height: 245px;
+        // position: fixed;
+        // bottom: 0;
+        // left: 0;
+        // right: 0;
 
         .footer-content {
-            width: 60%;
-            height: 245px;
+            width: 1130px;
             margin: 0 auto;
             .footer-top {
                 display: flex;
@@ -229,7 +260,7 @@ export default {
                     height: 31px;
                 }
                 .intro {
-                    font-size: 16px;
+                    font-size: 14px;
                     color: #ffffff;
                 }
             }

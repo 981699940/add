@@ -18,7 +18,7 @@ Vue.use(Router);
 export default new Router({
   mode: "history",
   routes: [
-    { path: "/", redirect: { path: "/intro" } },
+    { path: "/", redirect: { path: "/login" } },
     {
       path: "/index",
       redirect: { path: "/index/goods" },

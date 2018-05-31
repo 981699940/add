@@ -14,8 +14,8 @@
                     </div>
                     <div class="top-right">
                         <img src="../assets/img/icon-search.png">
-                        <span>登录</span>
-                        <span>注册</span>
+                        <span @click="goLogin">登录</span>
+                        <span @click="goRegister">注册</span>
                     </div>
 
                 </div>
@@ -85,7 +85,7 @@
                     <div class="bottom-left">
                         <span class="more">了解更多</span>
                         <span class="intro">为你创造最好的销售工具。在小岛上给客户建个家，把产品装进口袋里。用实力让情怀落地，让销售变的容易为你创造最好的销售工具。</span>
-                        <span class="get-mina">获取小程序</span>
+                        <span class="get-mina" @click="goIndex()">获取小程序</span>
                     </div>
                     <div class="bottom-right">
                         <img src="../assets/img/icon-get-mina.png">
@@ -200,6 +200,17 @@ export default {
                 }
             ]
         };
+    },
+    methods: {
+        goRegister() {
+            this.$router.push(`/register`);
+        },
+        goLogin() {
+            this.$router.push(`/login`);
+        },
+        goIndex() {
+            this.$router.push(`/index`);
+        }
     }
 };
 </script>
@@ -213,7 +224,7 @@ export default {
         background-size: 100% 100%;
         background-repeat: no-repeat;
         .header-wrapper {
-            width: 60%;
+            width: 1130px;
             margin: 0 auto;
             .header-top {
                 padding-top: 20px;
@@ -270,22 +281,27 @@ export default {
                     font-size: 40px;
                     color: #ffffff;
                     line-height: 70px;
+                    font-weight: 500;
+
                 }
                 .intro {
                     font-size: 18px;
                     width: 587px;
                     line-height: 25px;
                     margin-top: 30px;
+                    // font-weight: 500;
+
                 }
                 .center-button {
                     border: 2px solid #ffffff;
                     border-radius: 4px;
                     font-size: 16px;
                     color: #ffffff;
+                    font-weight: 500;
                     width: 150px;
-                    height: 50px;
+                    // height: 50px;
                     text-align: center;
-                    line-height: 50px;
+                    line-height: 46px;
                     margin-top: 70px;
                     cursor: pointer;
                 }
@@ -296,7 +312,7 @@ export default {
         width: 100%;
         background: #fff;
         .container-wrapper {
-            width: 60%;
+            width: 1130px;
             margin: 0 auto;
             .container-top {
                 padding-top: 140px;
@@ -320,6 +336,8 @@ export default {
                     .text {
                         display: flex;
                         flex-direction: column;
+                        font-weight: 500;
+
                         .text-top {
                             font-size: 24px;
                             color: #3d4852;
@@ -336,21 +354,30 @@ export default {
                 margin-top: 116px;
                 display: flex;
                 flex-wrap: wrap;
+                width: 100%;
 
                 .show-person {
+                    // width: 25%;
                     img {
                         height: 340px;
                         width: 266px;
-                        margin-right: 20px;
+                        margin-right: 22px;
                         margin-bottom: 22px;
                         border-radius: 10px;
                     }
+                    &:nth-child(4) {
+                        img {
+                            margin-right: 0;
+                        }
+                    }
                     .cover {
+                        // width: 94%;
                         width: 0;
                         height: 0;
                         position: relative;
                         .display-text {
                             position: absolute;
+                            // width: 100%;
                             width: 266px;
                             height: 340px;
                             top: -366px;
@@ -360,6 +387,7 @@ export default {
                             background: rgba(0, 0, 0, 0.2);
                             cursor: pointer;
                             span {
+                                font-weight: 500;
                                 color: #ffffff;
                                 &.name {
                                     padding: 20px;
@@ -377,28 +405,33 @@ export default {
                                 }
                                 &.num {
                                     margin-top: 15px;
-                                    width: 65%;
+                                    width: 172px;
                                     background: #23abe2;
                                     border-radius: 0 18px 18px 0;
                                     padding: 7px 37px 7px 20px;
                                     font-size: 16px;
+                                    font-weight: 400;
+
                                 }
                             }
                         }
                     }
                 }
                 .show-more {
+                    // width: 50%;
                     img {
                         width: 554px;
                         height: 340px;
                     }
                     .cover {
+                        // width: 98%;
                         width: 0;
                         height: 0;
                         position: relative;
                         .display-text {
                             position: absolute;
                             width: 554px;
+                            // width: 100%;
                             height: 340px;
                             top: -344px;
                             display: flex;
@@ -410,6 +443,7 @@ export default {
                                 margin-top: 250px;
                                 margin-left: 365px;
                                 padding-left: 36px;
+                                font-weight: 500;
                                 padding-bottom: 4px;
                                 font-size: 30px;
                                 color: #ffffff;
@@ -435,6 +469,7 @@ export default {
                     .more {
                         font-size: 24px;
                         color: #3d4852;
+                        font-weight: 500;
                     }
                     .intro {
                         margin-top: 30px;
@@ -449,8 +484,8 @@ export default {
                         font-size: 16px;
                         color: #23abe2;
                         width: 133px;
-                        height: 48px;
-                        line-height: 48px;
+                        // height: 48px;
+                        line-height: 44px;
                         text-align: center;
                         cursor: pointer;
 
@@ -480,6 +515,7 @@ export default {
             .concat {
                 font-size: 22px;
                 color: #3d4852;
+                font-weight: 500;
             }
             .english {
                 margin-top: 30px;
@@ -488,13 +524,13 @@ export default {
                 margin-bottom: 60px;
             }
             .email {
-                width: 50%;
+                width: 456px;
                 text-align: center;
                 input {
                     background: #ffffff;
                     border-radius: 4px;
                     font-size: 14px;
-                    width: 38%;
+                    width: 82%;
                     height: 48px;
                     padding-left: 20px;
                     &::-webkit-input-placeholder {
@@ -515,11 +551,11 @@ export default {
         .bottom-footer {
             height: 600px;
             text-align: center;
-            width: 60%;
+            width: 1130px;
             margin: 0 auto;
             .footer-top {
                 display: flex;
-                margin-top: 70px;
+                padding-top: 70px;
                 justify-content: space-between;
                 .intro {
                     width: 20%;
@@ -537,6 +573,8 @@ export default {
                         font-size: 14px;
                         color: #9da7af;
                         line-height: 28px;
+                        font-weight: 500;
+
                     }
                 }
                 .nav {
@@ -545,10 +583,12 @@ export default {
                     flex-direction: column;
                     align-items: flex-start;
                     span {
-                        font-size: 16px;
+                        font-size: 14px;
                         color: #ffffff;
                         margin-bottom: 26px;
                         cursor: pointer;
+                        font-weight: 500;
+
                         &.title {
                             font-size: 18px;
                             color: #9da7af;
@@ -565,9 +605,10 @@ export default {
                     align-content: flex-start;
                     text-align: left;
                     span {
-                        font-size: 16px;
+                        font-size: 14px;
                         color: #ffffff;
                         margin-bottom: 26px;
+                        font-weight: 500;
                         &.title {
                             font-size: 18px;
                             color: #9da7af;
@@ -576,37 +617,35 @@ export default {
                         &:last-child {
                             margin-top: 32px;
                             font-size: 24px;
-
                         }
                     }
                 }
-                .focus{
+                .focus {
                     width: 20%;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
 
-                    span{
-                         font-size: 18px;
+                    span {
+                        font-size: 18px;
                         color: #9da7af;
-
+                        font-weight: 500;
                     }
-                    .focus-way{
+                    .focus-way {
                         margin-top: 43px;
 
-                        img{
+                        img {
                             cursor: pointer;
                             width: 30px;
                             height: 24px;
                             margin-right: 30px;
-    
                         }
                     }
                 }
             }
 
             .footer-bottom {
-                margin-top: 134px;
+                margin-top: 126px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;

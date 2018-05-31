@@ -3,8 +3,8 @@
         <div class="login-header">
             <div class="header-content">
 
-                <img class="brand" src="../assets/img/icon-brand.png">
-                <span>首页</span>
+                <img class="brand" src="../assets/img/icon-brand.png" @click="goIndex">
+                <span @click="goIndex">首页</span>
             </div>
 
         </div>
@@ -12,7 +12,7 @@
             <div class="container-content">
                 <div class="login-title">
                     <span class="title">登录</span>
-                    <span class="register">立即注册</span>
+                    <span class="register" @click="goRegister">立即注册</span>
                 </div>
                 <div class="login-input">
                     <input type="text" placeholder="手机号">
@@ -57,6 +57,15 @@
 export default {
     data() {
         return {};
+    },
+    methods:{
+        goRegister(){
+            this.$router.push(`/register`)
+
+        },
+        goIndex(){
+            this.$router.push(`/layout`)
+        }
     }
 };
 </script>
@@ -72,11 +81,12 @@ export default {
         .header-content {
             display: flex;
             margin: 0 auto;
-            width: 60%;
+            width: 1130px;
             justify-content: space-between;
             .brand {
                 width: 121px;
                 height: 30px;
+                cursor: pointer;
             }
             span {
                 font-size: 16px;
@@ -89,10 +99,11 @@ export default {
         widows: 100%;
         padding-top: 80px;
         background: #f1f4f8;
-        height: 765px;
+        min-height: 765px;
+        height: 75vh;
         .container-content {
             margin: 0 auto;
-            width: 30%;
+            width: 485px;
             height: 465px;
             padding: 40px;
             background: #fff;
@@ -173,15 +184,18 @@ export default {
         }
     }
     .login-footer {
-        width: 100%;
         background: #3d4852;
         padding-top: 70px;
         padding-bottom: 40px;
         height: 245px;
+        width: 100%;
+        // position: fixed;
+        // bottom: 0;
+        // left: 0;
+        // right: 0;
 
         .footer-content {
-            width: 60%;
-            height: 245px;
+            width: 1130px;
             margin: 0 auto;
             .footer-top {
                 display: flex;
@@ -193,7 +207,7 @@ export default {
                     height: 31px;
                 }
                 .intro {
-                    font-size: 16px;
+                    font-size: 14px;
                     color: #ffffff;
                 }
             }
@@ -218,4 +232,19 @@ export default {
         }
     }
 }
+// @media only screen and (max-height:1080px) {
+//     .login-footer{
+//         position: fixed;
+//         bottom: 0;
+//         left: 0;
+//         right: 0;
+//         background: #3d4852;
+//         padding-top: 70px;
+//         padding-bottom: 40px;
+//         height: 245px;
+//     }
+
+
+    
+// }
 </style>

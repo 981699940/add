@@ -3,10 +3,11 @@
     <div>{{this.$route.path}}</div>
         <div class="btn-audio" @click.stop="play"></div>
         <audio id="audio" ref='player' @timeupdate="myFunction">
+
             <source :src="url">
         </audio>
         <span>{{parseInt(lestTime) }}</span>
-        <span>{{dTime }}</span> -->
+        <span>{{dTime }}</span>
         <span>{{tiem}}</span>
         <!-- <span>{{setTimeout(this.lestTime,100) }}</span> -->
     </div>
@@ -19,8 +20,6 @@ export default {
                 "https://static.innotick.com/smartwork/file/568e134a1f26099108c4f4fd0cfb1c48f41fb12adf8f0a8771ca2166e2729739.mp3",
             isPlaying: true,
             lestTime: 0,
-            ddd: 0,
-            cTime: 0,
             dTime: 0,
             tiem: 0
         };
@@ -28,18 +27,28 @@ export default {
     mounted() {},
     methods: {
         play() {
-            var audio = document.querySelector("#audio");
-            this.lestTime = audio.duration;
-            this.ddd = audio.currentTime;
-            if (audio.paused) {
-                audio.play();
+            // this.lestTime = audio.duration;
+            // this.ddd = audio.currentTime;
+            // if (audio.paused) {
+            //     audio.play();
+            // } else {
+            //     audio.pause();
+            // }
+            let audi = this.$refs.player
+            //等同于 document.querySelector("#audio")
+            //document.getElementsByClassName(name)[0] 因为class不唯一 返回的是数组 这里name是变量
+            //当ref和v-for一起使用时,获取到的引用是一个数组
+            //this.$refs 是打印所有绑定了ref的标签  (如我input audio 都绑定了 打印该值是个object 不同标签是不同成员  但相同标签会归纳在一起成为成员数组)
+            this.lestTime = audi.duration;
+            this.ddd = audi.currentTime;
+            if (audi.paused) {
+                audi.play();
             } else {
-                audio.pause();
+                audi.pause();
             }
         },
         myFunction() {
             var audio = document.querySelector("#audio");
-            console.log(audio.currentTime, "llllllll");
             this.tiem = audio.currentTime;
         }
     }

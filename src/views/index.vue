@@ -13,12 +13,18 @@
 export default {
   data(){
       return{
-          msg:"hello tic"
       }
   }
 }
 </script>
 <style>
+*{
+    font-size: 16px;
+}
+.hello{
+    margin-left: 20px;
+    margin-top: 20px;
+}
 .router-link-active{
   background-color: red;
 }
