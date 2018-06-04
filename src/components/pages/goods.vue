@@ -53,19 +53,17 @@ export default {
             // }
             this.currentId = item.id;
             // this.$router.push(`/index/goods?id=${item.id}`);
-            this.testInclude()
+            // this.testInclude()
             this.$router.push(`/index/goods?position=${item.id}`);
         },
-        testInclude(){
-            console.log (this.list.includes(this.list.id=2))
-            // console.log(thi)  
+        // testInclude(){
+        //     console.log (this.list.includes(this.list.id==2))
 
-
-        }
+        // }
     }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .flex {
     display: flex; 
     // flex-direction: column;
