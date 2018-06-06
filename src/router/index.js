@@ -12,6 +12,8 @@ import ToRight from "../components/pages/to-right";
 import ToLeft from "../components/pages/to-left";
 import ToCenter from "../components/pages/to-center";
 import Position from "../components/pages/position";
+import Test from "@/views/test";
+import Page from "@/views/page";
 
 Vue.use(Router);
 
@@ -28,12 +30,18 @@ export default new Router({
         { path: "goods", component: Goods },
         { path: "ratings", component: Ratings },
         { path: "seller", component: Seller },
+        { path: "right", component: ToRight },
+        { path: "left", component: ToLeft },
+        { path: "center", component: ToCenter },
       ]
     },
     { path: "/intro", component: Intro },
     { path: "/login", component: Login },
     { path: "/register", component: Register },
-    { path: "/layout", component: Layout }
+    { path: "/layout", component: Layout },
+    { path: "/test", component: Test },
+    { path: "/page", component: Page }
+
 
   ]
 });

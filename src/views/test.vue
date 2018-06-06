@@ -9,13 +9,12 @@
         </div>
         <div class="index-body">
         </div> -->
-        <div class="choose-city">
+        <div class="choose-city" @click="showOption" :class="{active: flag}" @click.stop="flag = !flag">
             <span class="selected-city">{{city}}</span>
             <div class="option-city">
                 <div class="option-wrapper">
                     <template v-for="item in list">
                         <span class="city" @click="changeCity(item.name)">{{item.name}}</span>
-
                     </template>
                 </div>
 
@@ -40,13 +39,21 @@ export default {
                 { name: "舟山市", id: 9 },
                 { name: "台州市", id: 10 },
                 { name: "丽水市", id: 11 }
-            ]
+            ],
+            showCity: false,
+            flag: false
         };
     },
-    methods:{
-        changeCity(city){
-            this.city = city
-
+    methods: {
+        changeCity(city) {
+            this.city = city;
+        },
+        showOption() {
+            if (this.showCity) {
+                this.showCity = false;
+            } else {
+                this.showCity = true;
+            }
         }
     }
 };
@@ -129,6 +136,7 @@ export default {
         font-weight: 500;
         top: 100px;
         left: 100px;
+        border: 1px solid transparent;
         cursor: pointer;
         &::before {
             content: "";
@@ -137,13 +145,13 @@ export default {
             bottom: 0;
             right: 0;
             background-color: #1c2573;
-            width: 28px;
-            height: 33px;
-            transform: translateX(50%) translateY(50%) rotate(40deg);
+            width: 23px;
+            height: 25px;
+            transform: translateX(50%) translateY(50%) rotate(45deg);
         }
         &::after {
             content: "";
-            background-image: url("../../assets/img/icon-select-down.png");
+            background-image: url("../assets/img/icon-select-down.png");
             width: 11px;
             height: 6px;
             position: absolute;
@@ -153,9 +161,15 @@ export default {
         .selected-city {
             color: #3cb8f1;
             font-size: 18px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
         }
         .option-city {
             display: none;
+            // display: block;
             position: absolute;
             bottom: 0px;
             left: -1px;
@@ -174,19 +188,24 @@ export default {
                     height: 42px;
                     line-height: 42px;
                     padding-left: 14px;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    -o-user-select: none;
+                    user-select: none;
                 }
             }
         }
-        &:hover::before {
-            display: none;
-        }
-        &:hover {
+
+        &.active {
             border-left: 1px solid #4d93f1;
             border-right: 1px solid #4d93f1;
             border-top: 1px solid #4d93f1;
+            &::before {
+                display: none;
+            }
             .option-city {
                 display: block;
-
                 .option-wrapper::before {
                     content: "";
                     display: block;
@@ -208,9 +227,9 @@ export default {
                     }
                 }
             }
-        }
-        &:hover::after {
-            background-image: url("../../assets/img/icon-select-up.png");
+            &::after {
+                background-image: url("../assets/img/icon-select-up.png");
+            }
         }
     }
 }

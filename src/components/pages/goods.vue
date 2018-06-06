@@ -13,33 +13,33 @@
     </div>
 </template>
 <script>
-import Position from    "./position"
+import Position from "./position";
 export default {
-    components:{
+    components: {
         Position
     },
     data() {
         return {
             list: [
-                { name: "left", id: 1 },
-                { name: "center", id: 2 },
-                { name: "right", id: 3 }
+                { name: "time", id: 1 },
+                { name: "calc", id: 2 },
+                { name: "select", id: 3 },
+                { name: "hell", id: 4 },
+                { name: "right5", id: 5 },
+                { name: "right6", id: 6 },
+                { name: "right7", id: 7 }
             ],
             currentId: 0
         };
     },
-    watch:{
-        $route:function (val){
+    watch: {
+        $route: function(val) {
             this.currentId = val.query.position | 0;
-
         }
-
-    }
-    ,
-    mounted(){
+    },
+    mounted() {
         this.currentId = this.$route.query.position | 0;
-    }
-    ,
+    },
     methods: {
         tabToPage(item) {
             // switch (item.id) {
@@ -55,7 +55,7 @@ export default {
             // this.$router.push(`/index/goods?id=${item.id}`);
             // this.testInclude()
             this.$router.push(`/index/goods?position=${item.id}`);
-        },
+        }
         // testInclude(){
         //     console.log (this.list.includes(this.list.id==2))
 
@@ -65,7 +65,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .flex {
-    display: flex; 
+    display: flex;
     // flex-direction: column;
 
     .test-flex {
@@ -82,6 +82,7 @@ export default {
             border-radius: 8px;
             &.active {
                 background: yellow;
+                color: black;
             }
         }
     }

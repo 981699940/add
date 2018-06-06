@@ -27,6 +27,11 @@
 
             </div>
         </template>
+         <template v-if="currentPage ==4">
+            <div class="hell">
+                <img src="../../assets/img/test.jpg" >
+            </div>
+        </template>
     </div>
 </template>
 <script>
@@ -92,6 +97,7 @@ export default {
 };
 </script>
 <style lang="scss">
+    
 .time-set {
     span {
         &.button-start {
@@ -104,7 +110,6 @@ export default {
         }
     }
 }
-
 .test-flexs {
     margin-top: 40px;
     width: 800px;
@@ -122,13 +127,11 @@ export default {
 .el-select-dropdown {
     .el-select-dropdown__item {
         padding: 0 36px;
-        // &::before {
-        //     position: absolute;
-        //     left: 20px;
-        //     content: "\E611";
-        //     font-size: 12px;
-        //     font-weight: 700;
-        // }
+        &.selected{
+            background-color: #e26829;
+            color: #e26829 !important;
+
+        }
         .txt-span {
             margin-left: 16px;
         }
@@ -144,4 +147,19 @@ export default {
         }
     }
 }
+.hell{
+    width: 500px;
+    height: 500px;
+    background: #1c0050;
+    padding: 40px;
+    img{
+        width: 100px;
+        height: 100px;
+        border-radius: 25px;
+        
+    }
+}
 </style>
+
+
+  
