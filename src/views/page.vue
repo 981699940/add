@@ -2,7 +2,7 @@
     <div class="index">
         <div class="index-header">
             <div class="header-content">
-                <h1>浙江省自助机物联网检测平台</h1>
+                <h1>{{mapInfo[currentIndex].name}}自助机物联网检测平台</h1>
                 <h2>2018-03-08 12:00</h2>
             </div>
         </div>
@@ -14,7 +14,7 @@
                         <div class="content-top">
                             <div class="content-top-left">
                                 <span>正常机器(台)</span>
-                                <span class="number">750</span>
+                                <span class="number">{{mapInfo[currentIndex].statistics.nomalNum}}</span>
                             </div>
                             <div class="content-top-right">
                                 <img src="../assets/img/icon-statistics-top.png">
@@ -23,7 +23,7 @@
                         <div class="content-center">
                             <div class="content-center-left">
                                 <span>故障机器(台)</span>
-                                <span class="number">10</span>
+                                <span class="number">{{mapInfo[currentIndex].statistics.failNum}}</span>
                             </div>
                             <div class="content-center-right">
                                 <img src="../assets/img/icon-statistics-center.png">
@@ -32,7 +32,7 @@
                         <div class="content-bottom">
                             <div class="content-bottom-left">
                                 <span>维修机器(台)</span>
-                                <span class="number">20</span>
+                                <span class="number">{{mapInfo[currentIndex].statistics.repairNum}}</span>
                             </div>
                             <div class="content-bottom-right">
                                 <img src="../assets/img/icon-statistics-bottom.png">
@@ -74,20 +74,20 @@
                     <div class="real-time">
                         <span>实时使用数量(台)</span>
                         <div class="real-time-num">
-                            <span>7</span>
-                            <span>8</span>
-                            <span>0</span>
+                            <span v-if="mapInfo[currentIndex].realTimeNum.toString().length>=4">{{parseInt(mapInfo[currentIndex].realTimeNum%10000/1000)}}</span>
+                            <span v-if="mapInfo[currentIndex].realTimeNum.toString().length>=3">{{parseInt(mapInfo[currentIndex].realTimeNum%1000/100)}}</span>
+                            <span v-if="mapInfo[currentIndex].realTimeNum.toString().length>=2">{{parseInt(mapInfo[currentIndex].realTimeNum%100/10)}}</span>
+                            <span v-if="mapInfo[currentIndex].realTimeNum.toString().length>=1">{{parseInt(mapInfo[currentIndex].realTimeNum%10)}}</span>
                         </div>
                         <span class="use-rate">可用率</span>
-                        <span class="use-rate-num">92%</span>
+                        <span class="use-rate-num">{{mapInfo[currentIndex].useRate}}</span>
                     </div>
-                    <!-- <div class="choose-city">选择城市</div> -->
-                    <div class="choose-city" @click="showOption" :class="{active: flag}" @click.stop="flag = !flag">
+                    <div class="choose-city" :class="{active: flag}" @click.stop="flag = !flag">
                         <span class="selected-city">{{city}}</span>
                         <div class="option-city">
                             <div class="option-wrapper">
                                 <template v-for="item in list">
-                                    <span class="city" @click="changeCity(item.name)">{{item.name}}</span>
+                                    <span class="city" @click="changeCity(item)">{{item.name}}</span>
                                 </template>
                             </div>
 
@@ -96,18 +96,18 @@
 
                 </div>
                 <div class="body-center-center">
-                    <img src="../assets/img/icon-zhejiang.png">
+                    <img :src="mapInfo[currentIndex].map">
                 </div>
                 <div class="body-center-bottom">
                     <div class="center-bottom-left">
                         <div class="user">
                             <span>当天使用人数</span>
-                            <span class="user-num">314</span>
+                            <span class="user-num">{{mapInfo[currentIndex].userNum}}</span>
                         </div>
                         <div class="boundary"></div>
                         <div class="average">
                             <span>平均使用时长</span>
-                            <span class="average-time">10小时</span>
+                            <span class="average-time">{{mapInfo[currentIndex].averageTime}}</span>
 
                         </div>
 
@@ -134,7 +134,7 @@
                                 <img src="../assets/img/icon-response.png">
                             </div>
                             <div class="wrapper">
-                                <template v-for="item in responseRank">
+                                <template v-for="item in mapInfo[currentIndex].responseRank">
                                     <div class="content-top-wrapper">
                                         <span>{{item.company}}</span>
                                         <div class="response-time">
@@ -153,7 +153,7 @@
                                 <img src="../assets/img/icon-operation.png">
                             </div>
                             <div class="wrapper">
-                                <template v-for="item in responseRank">
+                                <template v-for="item in mapInfo[currentIndex].responseRank">
                                     <div class="content-bottom-wrapper">
                                         <span>{{item.company}}</span>
                                         <div class="operation-time">
@@ -172,7 +172,7 @@
                 <div class="real-time-log">
                     <h2>实时日志</h2>
                     <div class="real-time-log-content">
-                        <div class="log" v-for="item in logList">
+                        <div class="log" v-for="item in mapInfo[currentIndex].logList">
                             <div class="dot" :class="['dot-'+item.type]"></div>
                             <span class="type">{{item.type | logType}}</span>
                             <div class="block">
@@ -212,44 +212,6 @@ export default {
                     pic: require("../assets/img/icon-company3.png")
                 }
             ],
-            responseRank: [
-                { company: "浙江杭州某某厂家", time: "10分钟" },
-                { company: "浙江宁波某某厂家", time: "20分钟" },
-                { company: "浙江杭州某某厂家", time: "23分钟" }
-            ],
-            //type : 1 正常     2.故障       3.维修
-            logList: [
-                {
-                    type: "2",
-                    robot: "杭州市西湖区公安分局出入境1号签注机",
-                    time: "12:10"
-                },
-                {
-                    type: "2",
-                    robot: "杭州市西湖区公安分局出入境1号电脑",
-                    time: "12:12"
-                },
-                {
-                    type: "3",
-                    robot: "杭州市拱墅区公安分局出入境1号电脑",
-                    time: "12:12"
-                },
-                {
-                    type: "3",
-                    robot: "温州市瓯海区公安分局出入境1号自助填表机",
-                    time: "09:20"
-                },
-                {
-                    type: "2",
-                    robot: "杭州市上城区公安分局出入境1号自助填表机",
-                    time: "06:20"
-                },
-                {
-                    type: "1",
-                    robot: "绍兴市越城区公安分局出入境2号签注机",
-                    time: "01:20"
-                }
-            ],
             city: "选择城市",
             list: [
                 { name: "杭州市", id: 1 },
@@ -264,8 +226,114 @@ export default {
                 { name: "台州市", id: 10 },
                 { name: "丽水市", id: 11 }
             ],
-            showCity: false,
-            flag: false
+            flag: false,
+            mapInfo: [
+                {
+                    id: 0,
+                    realTimeNum: 780,
+                    useRate: "92%",
+                    userNum: 314,
+                    averageTime: "10小时",
+                    name: "浙江省",
+                    map: require("../assets/img/icon-zhejiang.png"),
+                    logList: [
+                        //type : 1 正常     2.故障       3.维修
+                        {
+                            type: "2",
+                            robot: "杭州市西湖区公安分局出入境1号签注机",
+                            time: "12:10"
+                        },
+                        {
+                            type: "2",
+                            robot: "杭州市西湖区公安分局出入境1号电脑",
+                            time: "12:12"
+                        },
+                        {
+                            type: "3",
+                            robot: "杭州市拱墅区公安分局出入境1号电脑",
+                            time: "12:12"
+                        },
+                        {
+                            type: "3",
+                            robot: "温州市瓯海区公安分局出入境1号自助填表机",
+                            time: "09:20"
+                        },
+                        {
+                            type: "2",
+                            robot: "杭州市上城区公安分局出入境1号自助填表机",
+                            time: "06:20"
+                        },
+                        {
+                            type: "1",
+                            robot: "绍兴市越城区公安分局出入境2号签注机",
+                            time: "01:20"
+                        }
+                    ],
+                    responseRank: [
+                        { company: "浙江杭州某某厂家", time: "10分钟" },
+                        { company: "浙江宁波某某厂家", time: "20分钟" },
+                        { company: "浙江杭州某某厂家", time: "23分钟" }
+                    ],
+                    statistics: {
+                        nomalNum: 750,
+                        failNum: 10,
+                        repairNum: 20
+                    }
+                },
+                {
+                    id: 1,
+                    realTimeNum: 120,
+                    useRate: "96%",
+                    userNum: 80,
+                    averageTime: "9.2小时",
+                    name: "杭州市",
+                    map: require("../assets/img/icon-hangzhou.png"),
+                    logList: [
+                        //type : 1 正常     2.故障       3.维修
+                        {
+                            type: "2 ",
+                            robot: "杭州市西湖区公安分局出入境1号签注机",
+                            time: "12:10"
+                        },
+                        {
+                            type: "2",
+                            robot: "杭州市西湖区公安分局出入境1号电脑",
+                            time: "12:12"
+                        },
+                        {
+                            type: "3",
+                            robot: "杭州市拱墅区公安分局出入境1号电脑",
+                            time: "12:12"
+                        },
+                        {
+                            type: "3",
+                            robot: "杭州市淳安县公安分局出入境1号自助填表机",
+                            time: "09:20"
+                        },
+                        {
+                            type: "2",
+                            robot: "杭州市上城区公安分局出入境1号自助填表机",
+                            time: "06:20"
+                        },
+                        {
+                            type: "1",
+                            robot: "杭州市上城 区公安分局出入境2号签注机",
+                            time: "01:20"
+                        }
+                    ],
+                    responseRank: [
+                        { company: "浙江杭州某某厂家", time: "10分钟" },
+                        { company: "浙江杭州某某厂家", time: "20分钟" },
+                        { company: "浙江杭州某某厂家", time: "23分钟" }
+                    ],
+                    statistics: {
+                        nomalNum: 100,
+                        failNum: 10,
+                        repairNum: 10
+                    }
+                }
+            ],
+            currentIndex: 0
         };
     },
     filters: {
@@ -283,14 +351,8 @@ export default {
     },
     methods: {
         changeCity(city) {
-            this.city = city;
-        },
-        showOption() {
-            if (this.showCity) {
-                this.showCity = false;
-            } else {
-                this.showCity = true;
-            }
+            this.city = city.name;
+            this.currentIndex = 1;
         }
     }
 };
@@ -298,7 +360,7 @@ export default {
 <style lang="scss" scoped>
 .index {
     width: 100%;
-    min-width: 1800px;
+    min-width: 1920px;
     min-height: 1080px;
     height: 100vh;
     background: #1c2573;
@@ -690,9 +752,14 @@ export default {
                 position: absolute;
                 top: 112px;
                 z-index: 10;
+                width: 100%;
+                height: 700px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 img {
                     width: 649px;
-                    height: 673px;
+                    // height: 673px;
                 }
             }
             .body-center-bottom {
@@ -975,6 +1042,7 @@ export default {
                     }
                     .log {
                         display: flex;
+                        margin-bottom: 10px;
                         align-items: center;
 
                         .dot {
@@ -1004,7 +1072,6 @@ export default {
                         .block {
                             display: inline-flex;
                             flex: 1;
-                            margin-bottom: 10px;
                             justify-content: space-between;
                             align-items: center;
                             background: #ffffff;
