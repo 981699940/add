@@ -2,8 +2,8 @@
     <div>
         <!-- <div>{{this.$route.path}}</div> -->
         <div class="flex">
-            <div class="test-flex" v-for="item in list">
-                <span :class="{active: currentId == item.id}" @click.stop="tabToPage(item)">{{item.name}}</span>
+            <div class="test-flex" v-for="(item,index) in list">
+                <span :class="{active: currentId == item.id}" @click.stop="tabToPage(item,index,$event)">{{item.name}}</span>
             </div>
         </div>
         <div class="container">
@@ -24,8 +24,8 @@ export default {
                 { name: "time", id: 1 },
                 { name: "calc", id: 2 },
                 { name: "select", id: 3 },
-                { name: "hell", id: 4 },
-                { name: "right5", id: 5 },
+                { name: "file", id: 4 },
+                { name: "$nextTick", id: 5 },
                 { name: "right6", id: 6 },
                 { name: "right7", id: 7 }
             ],
@@ -41,7 +41,7 @@ export default {
         this.currentId = this.$route.query.position | 0;
     },
     methods: {
-        tabToPage(item) {
+        tabToPage(item, index, event) {
             // switch (item.id) {
             //     case 1:
 
@@ -51,6 +51,9 @@ export default {
             //     case 3:
             //         break;
             // }
+            console.log(event.currentTarget.innerHTML, "$event事件源"),
+            // console.log(index, "index");
+
             this.currentId = item.id;
             // this.$router.push(`/index/goods?id=${item.id}`);
             // this.testInclude()

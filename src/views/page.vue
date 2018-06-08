@@ -48,7 +48,7 @@
                         <div class="rank-content-wrapper">
 
                             <h3>本月故障排名</h3>
-                            <div class="content-company" v-for="item in rankList">
+                            <div class="content-company" v-for="item in mapInfo[currentIndex].rankList">
                                 <img :src="item.pic">
                                 <span class="no">{{item.rankNo}}</span>
                                 <span class="company">{{item.company}}</span>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="rank-content-wrapper">
                             <h3 class="content-bottom-h3">本月处理效率排名</h3>
-                            <div class="content-company" v-for="item in rankList">
+                            <div class="content-company" v-for="item in mapInfo[currentIndex].rankList">
                                 <img :src="item.pic">
                                 <span class="no">{{item.rankNo}}</span>
                                 <span class="company">{{item.company}}</span>
@@ -195,23 +195,6 @@
 export default {
     data() {
         return {
-            rankList: [
-                {
-                    rankNo: 1,
-                    company: "河北航信仪器制造有限公司",
-                    pic: require("../assets/img/icon-company1.png")
-                },
-                {
-                    rankNo: 2,
-                    company: "深圳华视电子读写设备有限公司",
-                    pic: require("../assets/img/icon-company2.png")
-                },
-                {
-                    rankNo: 3,
-                    company: "深圳市雄帝科技股份有限公司",
-                    pic: require("../assets/img/icon-company3.png")
-                }
-            ],
             city: "选择城市",
             list: [
                 { name: "杭州市", id: 1 },
@@ -278,7 +261,24 @@ export default {
                         nomalNum: 750,
                         failNum: 10,
                         repairNum: 20
-                    }
+                    },
+                    rankList: [
+                        {
+                            rankNo: 1,
+                            company: "河北航信仪器制造有限公司",
+                            pic: require("../assets/img/icon-company1.png")
+                        },
+                        {
+                            rankNo: 2,
+                            company: "深圳华视电子读写设备有限公司",
+                            pic: require("../assets/img/icon-company2.png")
+                        },
+                        {
+                            rankNo: 3,
+                            company: "深圳市雄帝科技股份有限公司",
+                            pic: require("../assets/img/icon-company3.png")
+                        }
+                    ]
                 },
                 {
                     id: 1,
@@ -330,7 +330,24 @@ export default {
                         nomalNum: 100,
                         failNum: 10,
                         repairNum: 10
-                    }
+                    },
+                    rankList: [
+                        {
+                            rankNo: 1,
+                            company: "河北航信仪器制造有限公司",
+                            pic: require("../assets/img/icon-company1.png")
+                        },
+                        {
+                            rankNo: 2,
+                            company: "深圳华视电子读写设备有限公司",
+                            pic: require("../assets/img/icon-company2.png")
+                        },
+                        {
+                            rankNo: 3,
+                            company: "深圳市雄帝科技股份有限公司",
+                            pic: require("../assets/img/icon-company3.png")
+                        }
+                    ]
                 }
             ],
             currentIndex: 0
@@ -659,8 +676,8 @@ export default {
                         right: 0;
                         background-color: #1c2573;
                         width: 28px;
-                        height: 33px;
-                        transform: translateX(50%) translateY(50%) rotate(40deg);
+                        height: 30px;
+                        transform: translateX(50%) translateY(50%) rotate(45deg);
                     }
                     &::after {
                         content: "";
@@ -727,8 +744,8 @@ export default {
                                 bottom: 0;
                                 right: 0;
                                 background-color: #1c2573;
-                                width: 24px;
-                                height: 25px;
+                                width: 28px;
+                                height: 30px;
                                 border-left: 1px solid #4d93f1;
                                 transform: translateX(50%) translateY(50%)
                                     rotate(45deg);

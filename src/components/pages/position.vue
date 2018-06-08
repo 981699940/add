@@ -27,10 +27,21 @@
 
             </div>
         </template>
-         <template v-if="currentPage ==4">
+        <template v-if="currentPage ==4">
             <div class="hell">
-                <img src="../../assets/img/test.jpg" >
+                <!-- <img src="../../assets/img/test.jpg" > -->
+                <input type="file" id="files" multiple @change="getFile">
+
             </div>
+        </template>
+        <template v-if="currentPage ==5">
+            <div ref="msgDiv">{{msg}}</div>
+            <div v-if="msg1">Message got outside $nextTick: {{msg1}}</div>
+            <div v-if="msg2">Message got inside $nextTick: {{msg2}}</div>
+            <div v-if="msg3">Message got outside $nextTick: {{msg3}}</div>
+            <button @click="changeMsg">
+                Change the Message
+            </button>
         </template>
     </div>
 </template>
@@ -62,7 +73,12 @@ export default {
                     label: "北京烤鸭"
                 }
             ],
-            value: ""
+            value: "",
+
+            msg: "Hello Vue.",
+            msg1: "",
+            msg2: "",
+            msg3: ""
         };
     },
     watch: {
@@ -92,12 +108,35 @@ export default {
         },
         change() {
             console.log(this.value);
+        },
+        // currentPage4
+        getFile(event) {
+            console.log(event.target.files, "aaaaaaaa");
+            var files = event.target.files;
+            for (var i = 0; i < files.length; i++) {
+                // 文件类型为 image 并且文件大小小于 200kb
+                if (
+                    files[i].type.indexOf("image/") !== -1 &&
+                    files[i].size < 204800
+                ) {
+                    console.log(files[i].name);
+                }
+            }
+        },
+        // currentPage 5
+        changeMsg() {
+            this.msg = "Hello world.";
+            this.msg1 = this.$refs.msgDiv.innerHTML;
+            this.$nextTick(() => {
+                this.msg2 = this.$refs.msgDiv.innerHTML;
+            });
+            this.msg3 = this.$refs.msgDiv.innerHTML;
+            //在回调中获取更新后的 DOM
         }
     }
 };
 </script>
 <style lang="scss">
-    
 .time-set {
     span {
         &.button-start {
@@ -127,10 +166,9 @@ export default {
 .el-select-dropdown {
     .el-select-dropdown__item {
         padding: 0 36px;
-        &.selected{
+        &.selected {
             background-color: #e26829;
             color: #e26829 !important;
-
         }
         .txt-span {
             margin-left: 16px;
@@ -147,17 +185,18 @@ export default {
         }
     }
 }
-.hell{
+.hell {
     width: 500px;
     height: 500px;
-    background: #1c0050;
+    // background: #1c0050;
+    background: grey;
+
     padding: 40px;
-    img{
-        width: 100px;
-        height: 100px;
-        border-radius: 25px;
-        
-    }
+    // img{
+    //     width: 100px;
+    //     height: 100px;
+    //     border-radius: 25px;
+    // }
 }
 </style>
 

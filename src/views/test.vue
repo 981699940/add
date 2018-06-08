@@ -9,6 +9,7 @@
         </div>
         <div class="index-body">
         </div> -->
+        <div>{{date}}</div>
         <div class="choose-city" @click="showOption" :class="{active: flag}" @click.stop="flag = !flag">
             <span class="selected-city">{{city}}</span>
             <div class="option-city">
@@ -41,8 +42,15 @@ export default {
                 { name: "丽水市", id: 11 }
             ],
             showCity: false,
-            flag: false
+            flag: false,
+            date:"",
         };
+    },
+    mounted(){
+        // this.initDate(){
+             let date = new Date();
+             this.date = date.toDateString();
+        // }
     },
     methods: {
         changeCity(city) {
