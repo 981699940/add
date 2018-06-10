@@ -13,7 +13,7 @@
         </template>
         <template v-if="currentPage ==3">
             <div class="test-select">
-                <!-- <el-select v-model="value" placeholder="Select" @change="change" multiple> -->
+                <div class="absolute"></div>
                 <el-select v-model="value" placeholder="Select" @change="change" multiple>
 
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -24,6 +24,12 @@
                         <span style="float:left;font-size:24px;">☐</span>
                     </el-option>
                 </el-select>
+                <br>
+                <div class="item-list">
+                    <template v-for="item in addList">
+                        <span>{{item.label}}</span> <br>
+                    </template>
+                </div>
 
             </div>
         </template>
@@ -53,32 +59,33 @@ export default {
             time: 60,
             options: [
                 {
-                    value: "选项1",
+                    value: 0,
                     label: "黄金糕"
                 },
                 {
-                    value: "选项2",
+                    value: 1,
                     label: "双皮奶"
                 },
                 {
-                    value: "选项3",
+                    value: 2,
                     label: "蚵仔煎"
                 },
                 {
-                    value: "选项4",
+                    value: 3,
                     label: "龙须面"
                 },
                 {
-                    value: "选项5",
+                    value: 4,
                     label: "北京烤鸭"
                 }
             ],
-            value: "",
+            value: [0, 1, 2, 3, 4],
 
             msg: "Hello Vue.",
             msg1: "",
             msg2: "",
-            msg3: ""
+            msg3: "",
+            addList: []
         };
     },
     watch: {
@@ -88,6 +95,7 @@ export default {
     },
     mounted() {
         this.currentPage = this.$route.query.position || 0;
+        this.addList = this.options;
     },
     methods: {
         runTime() {
@@ -107,7 +115,27 @@ export default {
             countdown();
         },
         change() {
-            console.log(this.value);
+            // this.addList = "";
+            this.$nextTick(() => {
+                if (this.value.length == 5) {
+                    this.addList = this.options;
+                }
+            });
+
+            console.log(this.value, "value");
+            this.addList = this.value.map(item => this.options[item]);
+            this.addList.sort((a, b) => a.value - b.value);
+            console.log(this.addList, "add");
+            // var aa = [
+            //     { time: 22, val: 22 },
+            //     { time: 11, val: 11 },
+            //     { time: 33, val: 33 },
+            //     { time: 44, val: 44 }
+            // ];
+            // aa.sort(function(a, b) {
+            //     return a.time > b.time;
+            // });//sort函数 如果a-b小于 0 a会排在b的前面
+            // console.log(aa);
         },
         // currentPage4
         getFile(event) {
@@ -162,6 +190,35 @@ export default {
     }
 }
 .test-select {
+    position: relative;
+    z-index: 10;
+    .absolute{
+        position: absolute;
+        height: 30px;
+        width: 194px;
+        border: 1px solid black;
+        border-radius: 25px;
+        background: #fff;
+    }
+    .el-select {
+        opacity: 0;
+        .el-select__tags{
+            span{
+                display: none;  
+            }
+        }
+        .el-input {
+            height: 30px;
+            .el-input__inner{
+                height: 30px !important;
+
+
+            }
+        }
+    }
+    .item-list {
+        margin-left: 300px;
+    }
 }
 .el-select-dropdown {
     .el-select-dropdown__item {
