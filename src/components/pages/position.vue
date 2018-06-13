@@ -32,6 +32,20 @@
                 </div>
 
             </div>
+            <div class="test-dialog" @click="showDialog" style="width:200px;height:50px;background:black;"></div>
+            <el-dialog title="hello kitty" :visible.sync="dialogVisible" custom-class="auth-dialog"   :show-close="false">
+                <el-checkbox-group v-model="checkList">
+                    <el-checkbox v-for="item in options" :key="item.label" :label="item.value"  @change="changeCheckBox">{{item.label}}</el-checkbox>
+                </el-checkbox-group>
+                <el-button @click="dialogClose">取消</el-button>
+                <el-button @click="saveAndClose">确认</el-button>
+
+            </el-dialog>
+            <div class="item-list">
+                <template v-for="item in checkAddList">
+                    <span>{{item.label}}</span> <br>
+                </template>
+            </div>
         </template>
         <template v-if="currentPage ==4">
             <div class="hell">
@@ -48,6 +62,9 @@
             <button @click="changeMsg">
                 Change the Message
             </button>
+        </template>
+        <template v-if="currentPage ==6">
+
         </template>
     </div>
 </template>
@@ -85,7 +102,11 @@ export default {
             msg1: "",
             msg2: "",
             msg3: "",
-            addList: []
+            addList: [],
+            dialogVisible: false,
+            checkList: [0, 1, 2, 3, 4],
+            checkAddList: [],
+            forClose: []
         };
     },
     watch: {
@@ -96,6 +117,7 @@ export default {
     mounted() {
         this.currentPage = this.$route.query.position || 0;
         this.addList = this.options;
+        this.checkAddList = this.options;
     },
     methods: {
         runTime() {
@@ -115,17 +137,15 @@ export default {
             countdown();
         },
         change() {
-            // this.addList = "";
-            this.$nextTick(() => {
-                if (this.value.length == 5) {
-                    this.addList = this.options;
-                }
-            });
+            // this.$nextTick(() => {
+            //     if (this.value.length == 5) {
+            //         this.addList = this.options;
+            //     }
+            // });
 
             console.log(this.value, "value");
             this.addList = this.value.map(item => this.options[item]);
             this.addList.sort((a, b) => a.value - b.value);
-            console.log(this.addList, "add");
             // var aa = [
             //     { time: 22, val: 22 },
             //     { time: 11, val: 11 },
@@ -136,6 +156,26 @@ export default {
             //     return a.time > b.time;
             // });//sort函数 如果a-b小于 0 a会排在b的前面
             // console.log(aa);
+        },
+        showDialog() {
+            this.dialogVisible = true;
+            this.forClose = this.checkList;
+            console.log(this.forClose,"forclose")
+        },
+        changeCheckBox() {
+            console.log(this.checkList, "aaaa");
+            this.checkAddList = this.checkList.map(item => this.options[item]);
+            this.checkAddList.sort((a, b) => a.value - b.value);
+        },
+        dialogClose() {
+            this.checkList = this.forClose;
+            console.log(this.forClose,"forclose close");
+            this.checkAddList = this.checkList.map(item => this.options[item]);
+            this.checkAddList.sort((a, b) => a.value - b.value);
+            this.dialogVisible = false;
+        },
+        saveAndClose() {
+            this.dialogVisible = false;
         },
         // currentPage4
         getFile(event) {
@@ -161,6 +201,7 @@ export default {
             this.msg3 = this.$refs.msgDiv.innerHTML;
             //在回调中获取更新后的 DOM
         }
+        //currentpage 6
     }
 };
 </script>
@@ -192,7 +233,7 @@ export default {
 .test-select {
     position: relative;
     z-index: 10;
-    .absolute{
+    .absolute {
         position: absolute;
         height: 30px;
         width: 194px;
@@ -202,17 +243,15 @@ export default {
     }
     .el-select {
         opacity: 0;
-        .el-select__tags{
-            span{
-                display: none;  
+        .el-select__tags {
+            span {
+                display: none;
             }
         }
         .el-input {
             height: 30px;
-            .el-input__inner{
+            .el-input__inner {
                 height: 30px !important;
-
-
             }
         }
     }
@@ -254,6 +293,113 @@ export default {
     //     height: 100px;
     //     border-radius: 25px;
     // }
+}
+.auth-dialog {
+    width: 700px;
+    .el-dialog__body {
+        padding: 20px 40px 10px 40px;
+        .el-checkbox-group {
+            overflow: hidden;
+            .el-checkbox {
+                width: 50%;
+                margin: 0;
+                float: left;
+                line-height: 40px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+}
+.el-dialog {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #353945;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
+
+.el-dialog--tiny {
+    width: 30%;
+}
+
+.el-dialog--small {
+    width: 50%;
+}
+
+.el-dialog--large {
+    width: 90%;
+}
+
+.el-dialog--full {
+    width: 100%;
+    top: 0;
+    margin-bottom: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+.el-dialog__wrapper {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    overflow: auto;
+    margin: 0;
+}
+
+.el-dialog__header {
+    padding: 20px;
+    background: #2b2f3b;
+}
+
+.el-dialog__headerbtn {
+    float: right;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.el-dialog__headerbtn .el-dialog__close {
+    color: rgb(217, 202, 191);
+}
+
+.el-dialog__headerbtn:focus .el-dialog__close,
+.el-dialog__headerbtn:hover .el-dialog__close {
+    color: #e26829;
+}
+
+.el-dialog__title {
+    line-height: 1;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.el-dialog__body {
+    padding: 30px 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.el-dialog__footer {
+    padding: 10px 20px 15px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.dialog-fade-enter-active {
+    animation: dialog-fade-in 0.3s;
+}
+
+.dialog-fade-leave-active {
+    animation: dialog-fade-out 0.3s;
 }
 </style>
 
