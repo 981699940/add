@@ -33,12 +33,21 @@
 
             </div>
             <div class="test-dialog" @click="showDialog" style="width:200px;height:50px;background:black;"></div>
-            <el-dialog title="hello kitty" :visible.sync="dialogVisible" custom-class="auth-dialog"   :show-close="false">
-                <el-checkbox-group v-model="checkList">
-                    <el-checkbox v-for="item in options" :key="item.label" :label="item.value"  @change="changeCheckBox">{{item.label}}</el-checkbox>
+            <el-dialog title="hello kitty" :visible.sync="dialogVisible" custom-class="auth-dialog" :show-close="false">
+                <!-- 需要优化部分 -->
+                <!-- <el-checkbox-group v-model="checkList">
+                    <el-checkbox v-for="item in options" :key="item.label" :label="item.value" @change="changeCheckBox">{{item.label}}</el-checkbox>
+                </el-checkbox-group> -->
+                <el-checkbox-group v-model="checkAddList">
+                    <el-checkbox v-for="item in options" :key="item.label" :label="item" @change="changeCheckBox">{{item.label}}</el-checkbox>
                 </el-checkbox-group>
-                <el-button @click="dialogClose">取消</el-button>
-                <el-button @click="saveAndClose">确认</el-button>
+
+                <!-- <el-button @click="dialogClose">取消</el-button>
+                <el-button @click="saveAndClose">确认</el-button> -->
+                <el-button @click="dialogClose(1)">取消</el-button>
+                <el-button @click="dialogClose(2)">确认</el-button>
+
+
 
             </el-dialog>
             <div class="item-list">
@@ -77,23 +86,28 @@ export default {
             options: [
                 {
                     value: 0,
-                    label: "黄金糕"
+                    label: "黄金糕",
+                    tof:true
                 },
                 {
                     value: 1,
-                    label: "双皮奶"
+                    label: "双皮奶",
+                    tof:true
                 },
                 {
                     value: 2,
-                    label: "蚵仔煎"
+                    label: "蚵仔煎",
+                    tof:true
                 },
                 {
                     value: 3,
-                    label: "龙须面"
+                    label: "龙须面",
+                    tof:false
                 },
                 {
                     value: 4,
-                    label: "北京烤鸭"
+                    label: "北京烤鸭",
+                    tof:true
                 }
             ],
             value: [0, 1, 2, 3, 4],
@@ -118,6 +132,8 @@ export default {
         this.currentPage = this.$route.query.position || 0;
         this.addList = this.options;
         this.checkAddList = this.options;
+        this.forEvery();
+
     },
     methods: {
         runTime() {
@@ -157,26 +173,49 @@ export default {
             // });//sort函数 如果a-b小于 0 a会排在b的前面
             // console.log(aa);
         },
+
+        //需要优化部分 之前的label是item.value 还要进行转换成数组对象  现在label用item
+        // showDialog() {
+        //     this.dialogVisible = true;
+        //     this.forClose = this.checkList;
+        //     console.log(this.forClose,"forclose")
+        // },
+        // changeCheckBox() {
+        //     console.log(this.checkList, "aaaa");
+        //     this.checkAddList = this.checkList.map(item => this.options[item]);
+        //     this.checkAddList.sort((a, b) => a.value - b.value);
+        // },
+        // dialogClose() {
+        //     this.checkList = this.forClose;
+        //     console.log(this.forClose,"forclose close");
+        //     this.checkAddList = this.checkList.map(item => this.options[item]);
+        //     this.checkAddList.sort((a, b) => a.value - b.value);
+        //     this.dialogVisible = false;
+        // },
+        // saveAndClose() {
+        //     this.dialogVisible = false;
+        // },
+
         showDialog() {
             this.dialogVisible = true;
-            this.forClose = this.checkList;
-            console.log(this.forClose,"forclose")
+            this.forClose = this.checkAddList;
+            console.log(this.forClose, "forclose");
         },
         changeCheckBox() {
-            console.log(this.checkList, "aaaa");
-            this.checkAddList = this.checkList.map(item => this.options[item]);
             this.checkAddList.sort((a, b) => a.value - b.value);
+            console.log(this.checkAddList, "aaaa");
         },
-        dialogClose() {
-            this.checkList = this.forClose;
-            console.log(this.forClose,"forclose close");
-            this.checkAddList = this.checkList.map(item => this.options[item]);
-            this.checkAddList.sort((a, b) => a.value - b.value);
+        dialogClose(index) {
+            if(index==1){this.checkAddList = this.forClose;}
             this.dialogVisible = false;
         },
-        saveAndClose() {
-            this.dialogVisible = false;
+        //测试every的用法 
+        forEvery(){
+            this.forevery=this.options.every(item=>item.tof);
+            console.log(this.forevery,"forevery")
+
         },
+
         // currentPage4
         getFile(event) {
             console.log(event.target.files, "aaaaaaaa");
