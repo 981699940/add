@@ -47,8 +47,6 @@
                 <el-button @click="dialogClose(1)">取消</el-button>
                 <el-button @click="dialogClose(2)">确认</el-button>
 
-
-
             </el-dialog>
             <div class="item-list">
                 <template v-for="item in checkAddList">
@@ -73,7 +71,11 @@
             </button>
         </template>
         <template v-if="currentPage ==6">
-
+            <ve-line :data="chartData"></ve-line>
+            <div class="test-vertical-align">
+                <span>hhh</span>
+                <span>xxx</span>
+            </div>
         </template>
     </div>
 </template>
@@ -87,27 +89,27 @@ export default {
                 {
                     value: 0,
                     label: "黄金糕",
-                    tof:true
+                    tof: true
                 },
                 {
                     value: 1,
                     label: "双皮奶",
-                    tof:true
+                    tof: true
                 },
                 {
                     value: 2,
                     label: "蚵仔煎",
-                    tof:true
+                    tof: true
                 },
                 {
                     value: 3,
                     label: "龙须面",
-                    tof:false
+                    tof: false
                 },
                 {
                     value: 4,
                     label: "北京烤鸭",
-                    tof:true
+                    tof: true
                 }
             ],
             value: [0, 1, 2, 3, 4],
@@ -120,7 +122,18 @@ export default {
             dialogVisible: false,
             checkList: [0, 1, 2, 3, 4],
             checkAddList: [],
-            forClose: []
+            forClose: [],
+            chartData: {
+                columns: ["日期", "销售量"],
+                rows: [
+                    { 日期: "1月1日", 销售量: 123 },
+                    { 日期: "1月2日", 销售量: 1232 },
+                    { 日期: "1月3日", 销售量: 2123 },
+                    { 日期: "1月4日", 销售量: 4123 },
+                    { 日期: "1月5日", 销售量: 3123 },
+                    { 日期: "1月6日", 销售量: 7123 }
+                ]
+            }
         };
     },
     watch: {
@@ -133,7 +146,6 @@ export default {
         this.addList = this.options;
         this.checkAddList = this.options;
         this.forEvery();
-
     },
     methods: {
         runTime() {
@@ -206,14 +218,15 @@ export default {
             console.log(this.checkAddList, "aaaa");
         },
         dialogClose(index) {
-            if(index==1){this.checkAddList = this.forClose;}
+            if (index == 1) {
+                this.checkAddList = this.forClose;
+            }
             this.dialogVisible = false;
         },
-        //测试every的用法 
-        forEvery(){
-            this.forevery=this.options.every(item=>item.tof);
-            console.log(this.forevery,"forevery")
-
+        //测试every的用法
+        forEvery() {
+            this.forevery = this.options.every(item => item.tof);
+            console.log(this.forevery, "forevery");
         },
 
         // currentPage4
@@ -240,7 +253,7 @@ export default {
             this.msg3 = this.$refs.msgDiv.innerHTML;
             //在回调中获取更新后的 DOM
         }
-        //currentpage 6
+        //currentpage 6  vuechat
     }
 };
 </script>
@@ -350,95 +363,15 @@ export default {
         }
     }
 }
-.el-dialog {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #353945;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
-    margin-bottom: 50px;
-}
-
-.el-dialog--tiny {
-    width: 30%;
-}
-
-.el-dialog--small {
-    width: 50%;
-}
-
-.el-dialog--large {
-    width: 90%;
-}
-
-.el-dialog--full {
-    width: 100%;
-    top: 0;
-    margin-bottom: 0;
-    height: 100%;
-    overflow: auto;
-}
-
-.el-dialog__wrapper {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    overflow: auto;
-    margin: 0;
-}
-
-.el-dialog__header {
-    padding: 20px;
-    background: #2b2f3b;
-}
-
-.el-dialog__headerbtn {
-    float: right;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.el-dialog__headerbtn .el-dialog__close {
-    color: rgb(217, 202, 191);
-}
-
-.el-dialog__headerbtn:focus .el-dialog__close,
-.el-dialog__headerbtn:hover .el-dialog__close {
-    color: #e26829;
-}
-
-.el-dialog__title {
-    line-height: 1;
-    font-size: 16px;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.el-dialog__body {
-    padding: 30px 20px;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 14px;
-}
-
-.el-dialog__footer {
-    padding: 10px 20px 15px;
-    text-align: right;
-    box-sizing: border-box;
-}
-
-.dialog-fade-enter-active {
-    animation: dialog-fade-in 0.3s;
-}
-
-.dialog-fade-leave-active {
-    animation: dialog-fade-out 0.3s;
+.test-vertical-align{
+    height: 40px;
+    background: #e26829;
+    vertical-align: bottom;
+    display: inline-block;
+    span{
+        display: inline-block;
+        vertical-align: bottom;
+    }
 }
 </style>
 

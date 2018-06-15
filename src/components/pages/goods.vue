@@ -26,7 +26,7 @@ export default {
                 { name: "select", id: 3 },
                 { name: "file", id: 4 },
                 { name: "$nextTick", id: 5 },
-                { name: "right6", id: 6 },
+                { name: "vuechat", id: 6 },
                 { name: "right7", id: 7 }
             ],
             currentId: 0
