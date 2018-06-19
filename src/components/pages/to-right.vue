@@ -1,16 +1,7 @@
 <template>
     <div class="index">
-        <!-- <div class="balloon-container">
-            <div class="mask"></div>
-            <div class="balloon">
-                <h1>浙江省自助机物联网检测平台</h1>
-                <h2>2018-03-08 12:00</h2>
-            </div>
-        </div>
-        <div class="index-body">
-        </div> -->
         <div class="choose-city">
-            <span class="selected-city">{{city}}</span>
+            <span class="selected-city">{{city}}{{allChecked}}</span>
             <div class="option-city">
                 <div class="option-wrapper">
                     <template v-for="item in list">
@@ -21,12 +12,30 @@
 
             </div>
         </div>
+        <div class="choosse-city " :class="{active:flag}">
+            <div class="selected-city" @click.stop="flag = !flag">
+                <label for="aaa">{{citys}}</label>
+                <input type="checkbox" id="aaa" :checked="isTitleChecked()" @change.stop="changeAllInput($event)" />
+            </div>
+            <div class="option-city">
+                <div class="option-wrapper">
+                    <div class="test" v-for="item in list1">
+                        <label class="city" :for="item.id">{{item.name}}</label>
+                        <input type="checkbox" :id="item.id" :value="item.id" v-model="kongsz"  @change="changeInput(item,$event)">
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
+            flag: false,
+            allChecked: false,
+            // isTitleChecked: false,
             city: "选择城市",
             list: [
                 { name: "杭州市", id: 1 },
@@ -40,12 +49,39 @@ export default {
                 { name: "舟山市", id: 9 },
                 { name: "台州市", id: 10 },
                 { name: "丽水市", id: 11 }
-            ]
+            ],
+             list1: [
+                { name: "杭州市", id: 1 },
+                { name: "宁波市", id: 2 },
+                { name: "温州市", id: 3 },
+                { name: "绍兴市", id: 4 },
+            ],
+            citys:"全选",
+            kongsz:[]
         };
     },
-    methods:{
+    methods: {
         changeCity(city){
             this.city = city
+        },
+        changeInput(item,event){
+            // console.log(item,event)
+            console.log(this.kongsz,"子标题点击")
+
+        },
+        isTitleChecked(){
+            console.log("父标题checked被调用")
+            return (this.kongsz.length==this.list1.length);
+
+        },
+        changeAllInput(event){
+            if(event.target.checked === true){
+                this.list1.forEach(item=>this.kongsz.indexOf(item.id)== -1 && this.kongsz.push(item.id))
+            }
+            else{
+                this.kongsz = []
+            }
+            console.log(this.kongsz,"父标题选择all")
 
         }
     }
@@ -211,6 +247,50 @@ export default {
         }
         &:hover::after {
             background-image: url("../../assets/img/icon-select-up.png");
+        }
+    }
+    .choosse-city {
+        margin-left: 800px;
+        position: relative;
+        &.active {
+            .option-city {
+                display: block;
+                .option-wrapper {
+                    .city:hover {
+                        color: #00ebff;
+                    }
+                }
+            }
+        }
+        .option-city {
+            display: none;
+            position: absolute;
+            bottom: 0px;
+            left: -1px;
+            background: #1f3f82;
+            width: 164px;
+            .option-wrapper {
+                display: flex;
+                flex-direction: column;
+                min-height: 42px;
+                position: absolute;
+                background: #1f3f82;
+                width: 164px;
+                .test {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-right: 20px;
+                    .city {
+                        font-size: 16px;
+                        color: #ffffff;
+                        height: 42px;
+                        line-height: 42px;
+                        padding-left: 14px;
+                        flex: 1;
+                    }
+                }
+            }
         }
     }
 }

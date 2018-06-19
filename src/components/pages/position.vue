@@ -48,11 +48,12 @@
                 <el-button @click="dialogClose(2)">确认</el-button>
 
             </el-dialog>
-            <div class="item-list">
+            <div class="item-list aaa" ref="textout">
                 <template v-for="item in checkAddList">
                     <span>{{item.label}}</span> <br>
                 </template>
             </div>
+            <span class="more" @click="openText()">加载更多</span>
         </template>
         <template v-if="currentPage ==4">
             <div class="hell">
@@ -113,6 +114,7 @@ export default {
                 }
             ],
             value: [0, 1, 2, 3, 4],
+            more:false,
 
             msg: "Hello Vue.",
             msg1: "",
@@ -228,6 +230,22 @@ export default {
             this.forevery = this.options.every(item => item.tof);
             console.log(this.forevery, "forevery");
         },
+        openText(){
+            if(this.more==false){
+                // this.$refs.textout.style.overflow= "scroll";
+                this.$refs.textout.style.height= "auto";
+                this.more = true
+
+            }else{
+                // this.$refs.textout.style.overflow= "hidden";
+                this.$refs.textout.style.height= "80px";
+
+                this.more = false
+            }
+            // this.$refs.textout.style.overflow= "visible";
+
+
+        },
 
         // currentPage4
         getFile(event) {
@@ -310,6 +328,15 @@ export default {
     .item-list {
         margin-left: 300px;
     }
+}
+.item-list.aaa{
+    height: 80px;
+    overflow: hidden;
+}
+.more{
+    cursor: pointer;
+    background: #000;
+    color: #fff;
 }
 .el-select-dropdown {
     .el-select-dropdown__item {
