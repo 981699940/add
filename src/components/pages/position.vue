@@ -27,7 +27,7 @@
                 <br>
                 <div class="item-list">
                     <template v-for="item in addList">
-                        <span>{{item.label}}</span> <br>
+                        <span :key="item.value">{{item.label}}</span> <br :key="item.value">
                     </template>
                 </div>
 
@@ -50,7 +50,7 @@
             </el-dialog>
             <div class="item-list aaa" ref="textout">
                 <template v-for="item in checkAddList">
-                    <span>{{item.label}}</span> <br>
+                    <span :key="item.value">{{item.label}}</span> <br :key="item.value">
                 </template>
             </div>
             <span class="more" @click="openText()">加载更多</span>

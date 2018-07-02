@@ -1,8 +1,11 @@
 <template>
     <div>
-    <div>{{this.$route.path}}</div>
-        <div class="btn-audio" @click.stop="play"></div>
-        <audio id="audio" ref='player' @timeupdate="myFunction">
+        <div>{{this.$route.path}}</div>
+        <div class="btn-audio"
+             @click.stop="play"></div>
+        <audio id="audio"
+               ref='player'
+               @timeupdate="myFunction">
 
             <source :src="url">
         </audio>
@@ -10,9 +13,14 @@
         <span>{{dTime }}</span>
         <span>{{tiem}}</span>
         <!-- <span>{{setTimeout(this.lestTime,100) }}</span> -->
+        <div class="test-bus"
+             @click="takeBus($event)">
+            bus-begin
+        </div>
     </div>
 </template>
 <script>
+import Bus from "../bus.js";
 export default {
     data() {
         return {
@@ -34,7 +42,7 @@ export default {
             // } else {
             //     audio.pause();
             // }
-            let audi = this.$refs.player
+            let audi = this.$refs.player;
             //等同于 document.querySelector("#audio")
             //document.getElementsByClassName(name)[0] 因为class不唯一 返回的是数组 这里name是变量
             //当ref和v-for一起使用时,获取到的引用是一个数组
@@ -50,6 +58,11 @@ export default {
         myFunction() {
             var audio = document.querySelector("#audio");
             this.tiem = audio.currentTime;
+        },
+        takeBus(event) {
+            console.log(event.target, "aaa");
+            Bus.$emit("getTarget", event.target);
+            Bus.$emit("say-hello", "world");
         }
     }
 };
@@ -60,6 +73,9 @@ export default {
     height: 32px;
     background: url(../../assets/img/img-voice.png) no-repeat;
     background-size: 100% 100%;
+}
+.test-bus {
+    cursor: pointer;
 }
 </style>
 

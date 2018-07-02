@@ -5,7 +5,7 @@
             <div class="option-city">
                 <div class="option-wrapper">
                     <template v-for="item in list">
-                        <span class="city" @click="changeCity(item.name)">{{item.name}}</span>
+                        <span class="city" @click="changeCity(item.name)" :key="item.id">{{item.name}}</span>
 
                     </template>
                 </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="option-city">
                 <div class="option-wrapper">
-                    <div class="test" v-for="item in list1">
+                    <div class="test" v-for="item in list1" :key="item.id">
                         <label class="city" :for="item.id">{{item.name}}</label>
                         <input type="checkbox" :id="item.id" :value="item.id" v-model="kongsz"  @change="changeInput(item,$event)">
                     </div>

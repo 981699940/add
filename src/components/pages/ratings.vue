@@ -3,7 +3,7 @@
         <div class="outside">
             <div class="inside"  id="test" @mousewheel.stop="handleScroll">
                 <template v-for="item in list">
-                    <ul>
+                    <ul :key="item.message">
                         <!-- :class="classA ? 'class-a' : 'class-b' " -->
                         <li :class="{'line': (item.message==='hello')}">{{item.message==="hello"}}</li>
                         <!-- <li :class="['line-last-'+item.message]" >{{item.message}}</li> -->
@@ -11,10 +11,20 @@
                 </template>
             </div>
         </div>
+        <span></span>
     </div>
 </template>
 <script>
+import Bus from '../bus.js'
 export default {
+    created(){
+        Bus.$on('getTarget',target=>{
+            console.log(target,"target")
+        }),
+        Bus.$on('say-hello',arg=>{
+            console.log('hello'+arg)
+        })
+    },
     data() {
         return {
             list: [

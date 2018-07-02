@@ -2,7 +2,7 @@
     <div>
         <!-- <div>{{this.$route.path}}</div> -->
         <div class="flex">
-            <div class="test-flex" v-for="(item,index) in list">
+            <div class="test-flex" v-for="(item,index) in list" :key="item.id">
                 <span :class="{active: currentId == item.id}" @click.stop="tabToPage(item,index,$event)">{{item.name}}</span>
             </div>
         </div>
