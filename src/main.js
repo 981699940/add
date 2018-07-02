@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VeLine from 'v-charts/lib/line'
 
 import '../src/assets/style/base.css';
+import '../src/assets/style/animate.css';
 // import VCharts from 'v-charts' 
 // Vue.use(VCharts) //  全局引入
 Vue.use(ElementUI);
