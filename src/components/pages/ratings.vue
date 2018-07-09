@@ -1,9 +1,9 @@
 <template>
-    <div class="ratings">{{this.$route.path}}
+    <div class="ratings">{{this.$route.path}} 
         <div class="outside">
             <div class="inside"  id="test" @mousewheel.stop="handleScroll">
-                <template v-for="item in list">
-                    <ul :key="item.message">
+                <template v-for="(item,index) in list">
+                    <ul :key="index">
                         <!-- :class="classA ? 'class-a' : 'class-b' " -->
                         <li :class="{'line': (item.message==='hello')}">{{item.message==="hello"}}</li>
                         <!-- <li :class="['line-last-'+item.message]" >{{item.message}}</li> -->

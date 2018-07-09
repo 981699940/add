@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- <div>{{this.$route.path}}</div> -->
+        <div>{{this.$route.path}}{{this.$route.params}} {{this.$route.query}} <span class="high-light">路由传参 query</span> </div>
         <div class="flex">
             <div class="test-flex" v-for="(item,index) in list" :key="item.id">
                 <span :class="{active: currentId == item.id}" @click.stop="tabToPage(item,index,$event)">{{item.name}}</span>
@@ -51,7 +51,7 @@ export default {
             //     case 3:
             //         break;
             // }
-            console.log(event.currentTarget.innerHTML, "$event事件源"),
+            console.log(index+1,event.currentTarget.innerHTML, "$event事件源"),
             // console.log(index, "index");
 
             this.currentId = item.id;

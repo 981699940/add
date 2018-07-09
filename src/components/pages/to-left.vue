@@ -1,9 +1,12 @@
 <template>
     <div>
+        <div class="test"
+             @click="fffff('case1')">
+        </div>
         <div class="hmi">
             <input type="text"
                    v-model="nowShow">
-            <button @click="show=!show">哈哈哈</button>
+            <button @click="show=!show">show sth</button>
             <transition name="fade"
                         @enter="enter($event)">
                 <div v-if="show"
@@ -25,9 +28,7 @@
                 </template>
             </transition-group>
         </div>
-        <div class="test"
-             @click="fffff('case1')">
-        </div>
+        
     </div>
 </template>
 
@@ -77,7 +78,7 @@ export default {
         },
         enter(el) {
             el.style.background = "yellow";
-            // console.log(el,"el")
+            console.log(el,"el")
         }
     }
 };
@@ -92,6 +93,9 @@ export default {
     input{
         border: none;
         background: white;
+    }
+    button{
+        border: 1px solid yellow;
     }
     .fade-enter-active,
     .fade-leave-active {
@@ -124,9 +128,8 @@ export default {
 }
 .test {
     width: 100px;
-    height: 100px;
+    height: 50px;
     overflow: auto;
-    padding: 44px 0;
     cursor: pointer;
     background: yellow;
 }

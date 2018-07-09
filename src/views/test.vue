@@ -15,7 +15,7 @@
             <div class="option-city">
                 <div class="option-wrapper">
                     <template v-for="item in list">
-                        <span class="city" @click="changeCity(item.name)">{{item.name}}</span>
+                        <span class="city" @click="changeCity(item.name)" :key="item.name">{{item.name}}</span>
                     </template>
                 </div>
 

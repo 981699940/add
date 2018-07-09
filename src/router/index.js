@@ -37,17 +37,10 @@ export default new Router({
     },
     //新路由 view
     {
-      path: "/test",
+      path: "/test/:id",
       name: "Test",
       component: Path,
-    //   children: [
-    //     { path: "goods", component: Goods },
-    //     { path: "ratings", component: Ratings },
-    //     { path: "seller", component: Seller },
-    //     { path: "right", component: ToRight },
-    //     { path: "left", component: ToLeft },
-    //     { path: "center", component: ToCenter }
-    //   ]
+        
     },
     { path: "/intro", component: Intro },
     { path: "/login", component: Login },

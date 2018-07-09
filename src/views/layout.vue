@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="container-center">
-                    <div class="show-person" v-for="item in list">
+                    <div class="show-person" v-for="item in list" :key="item.name">
                         <img :src="item.pho">
                         <div class="cover">
                             <div class="display-text">

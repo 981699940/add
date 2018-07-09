@@ -48,7 +48,7 @@
                         <div class="rank-content-wrapper">
 
                             <h3>本月故障排名</h3>
-                            <div class="content-company" v-for="item in mapInfo[currentIndex].rankList">
+                            <div class="content-company" v-for="item in mapInfo[currentIndex].rankList" :key="item.company">
                                 <img :src="item.pic">
                                 <span class="no">{{item.rankNo}}</span>
                                 <span class="company">{{item.company}}</span>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="rank-content-wrapper">
                             <h3 class="content-bottom-h3">本月处理效率排名</h3>
-                            <div class="content-company" v-for="item in mapInfo[currentIndex].rankList">
+                            <div class="content-company" v-for="item in mapInfo[currentIndex].rankList" :key="item.company">
                                 <img :src="item.pic">
                                 <span class="no">{{item.rankNo}}</span>
                                 <span class="company">{{item.company}}</span>
@@ -87,7 +87,7 @@
                         <div class="option-city">
                             <div class="option-wrapper">
                                 <template v-for="item in list">
-                                    <span class="city" @click="changeCity(item)">{{item.name}}</span>
+                                    <span class="city" @click="changeCity(item)" :key="item.name">{{item.name}}</span>
                                 </template>
                             </div>
 
@@ -135,7 +135,7 @@
                             </div>
                             <div class="wrapper">
                                 <template v-for="item in mapInfo[currentIndex].responseRank">
-                                    <div class="content-top-wrapper">
+                                    <div class="content-top-wrapper" :key="item.company">
                                         <span>{{item.company}}</span>
                                         <div class="response-time">
                                             <div class="response-time-display"></div>
@@ -154,7 +154,7 @@
                             </div>
                             <div class="wrapper">
                                 <template v-for="item in mapInfo[currentIndex].responseRank">
-                                    <div class="content-bottom-wrapper">
+                                    <div class="content-bottom-wrapper" :key="item.company">
                                         <span>{{item.company}}</span>
                                         <div class="operation-time">
                                             <div class="operation-time-display"></div>
@@ -172,7 +172,7 @@
                 <div class="real-time-log">
                     <h2>实时日志</h2>
                     <div class="real-time-log-content">
-                        <div class="log" v-for="item in mapInfo[currentIndex].logList">
+                        <div class="log" v-for="item in mapInfo[currentIndex].logList" :key="item.type">
                             <div class="dot" :class="['dot-'+item.type]"></div>
                             <span class="type">{{item.type | logType}}</span>
                             <div class="block">
