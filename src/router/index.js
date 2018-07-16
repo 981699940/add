@@ -14,13 +14,14 @@ import ToCenter from "../components/pages/to-center";
 import Test from "@/views/test";
 import Page from "@/views/page";
 import Path from "@/components/path/path"
+import Tree from "@/components/tree-select"
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
   routes: [
-    { path: "/", redirect: { path: "/login" } },
+    { path: "/", redirect: { path: "/index" } },
     {
       path: "/index",
       redirect: { path: "/index/goods" },
@@ -47,7 +48,8 @@ export default new Router({
     { path: "/register", component: Register },
     { path: "/layout", component: Layout },
     { path: "/test", component: Test },
-    { path: "/page", component: Page }
+    { path: "/page", component: Page },
+    {path:'/tree',component:Tree},
   ]
 });
 //   children: [

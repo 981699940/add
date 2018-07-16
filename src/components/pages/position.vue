@@ -3,7 +3,8 @@
         <template v-if="currentPage ==1">
             <div class="time-set">
                 <span>{{time}}</span>
-                <span class="button-start" @click.stop="runTime">开始</span>
+                <span class="button-start"
+                      @click.stop="runTime">开始</span>
             </div>
         </template>
         <template v-if="currentPage ==2">
@@ -14,9 +15,15 @@
         <template v-if="currentPage ==3">
             <div class="test-select">
                 <div class="absolute"></div>
-                <el-select v-model="value" placeholder="Select" @change="change" multiple>
+                <el-select v-model="value"
+                           placeholder="Select"
+                           @change="change"
+                           multiple>
 
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    <el-option v-for="item in options"
+                               :key="item.value"
+                               :label="item.label"
+                               :value="item.value">
 
                         <!-- <span style="float:right">{{item.label}}</span> -->
                         <span class="txt-span">{{item.label}}</span>
@@ -32,14 +39,22 @@
                 </div>
 
             </div>
-            <div class="test-dialog" @click="showDialog" style="width:200px;height:50px;background:black;"></div>
-            <el-dialog title="hello kitty" :visible.sync="dialogVisible" custom-class="auth-dialog" :show-close="false">
+            <div class="test-dialog"
+                 @click="showDialog"
+                 style="width:200px;height:50px;background:black;"></div>
+            <el-dialog title="hello kitty"
+                       :visible.sync="dialogVisible"
+                       custom-class="auth-dialog"
+                       :show-close="false">
                 <!-- 需要优化部分 -->
                 <!-- <el-checkbox-group v-model="checkList">
                     <el-checkbox v-for="item in options" :key="item.label" :label="item.value" @change="changeCheckBox">{{item.label}}</el-checkbox>
                 </el-checkbox-group> -->
                 <el-checkbox-group v-model="checkAddList">
-                    <el-checkbox v-for="item in options" :key="item.label" :label="item" @change="changeCheckBox">{{item.label}}</el-checkbox>
+                    <el-checkbox v-for="item in options"
+                                 :key="item.label"
+                                 :label="item"
+                                 @change="changeCheckBox">{{item.label}}</el-checkbox>
                 </el-checkbox-group>
 
                 <!-- <el-button @click="dialogClose">取消</el-button>
@@ -48,17 +63,22 @@
                 <el-button @click="dialogClose(2)">确认</el-button>
 
             </el-dialog>
-            <div class="item-list aaa" ref="textout">
+            <div class="item-list aaa"
+                 ref="textout">
                 <template v-for="item in checkAddList">
                     <span :key="item.value">{{item.label}}</span> <br>
                 </template>
             </div>
-            <span class="more" @click="openText()">加载更多</span>
+            <span class="more"
+                  @click="openText()">加载更多</span>
         </template>
         <template v-if="currentPage ==4">
             <div class="hell">
                 <!-- <img src="../../assets/img/test.jpg" > -->
-                <input type="file" id="files" multiple @change="getFile">
+                <input type="file"
+                       id="files"
+                       multiple
+                       @change="getFile">
 
             </div>
         </template>
@@ -73,17 +93,96 @@
         </template>
         <template v-if="currentPage ==6">
             <ve-line :data="chartData"></ve-line>
+            <!-- <ve-line :data="statisticData"
+                     :yAxis="statisticData.yAxis"
+                     :xAxis="statisticData.xAxis"
+                     :settings="chartSettings"
+                     :option='statisticData'>
+            </ve-line> -->
+            <div id="myChart"
+                 style="height:300px;width:50%"
+                 ref="myEchart"></div>
+            <div>
+                <span @click="chartType(1)">日</span>&nbsp;
+                <span @click="chartType(2)">月</span>&nbsp;
+                <span @click="chartType(3)">年</span>
+            </div>
+            <el-progress type="circle"
+                         :percentage="25"
+                         color='#147AFF'></el-progress>
             <div class="test-vertical-align">
-                <span>hhh</span>
+                <span>hhh{{today |timeFormat(1)}}</span>
                 <span>xxx</span>
             </div>
         </template>
     </div>
 </template>
 <script>
+import VeLine from "v-charts/lib/line";
+import echarts from "echarts";
 export default {
+    components: { VeLine },
     data() {
         return {
+            chart: "",
+            statisticData: {
+                legend: {
+                    data: ["正常设备", "故障设备", "维修设备"]
+                },
+                xAxis: {
+                    type: "category",
+                    data: ["1", "2", "3"]
+                },
+                yAxis: {
+                    type: "value"
+                },
+                series: [
+                    {
+                        name: "正常设备",
+                        type: "line",
+                        data: [120, 132, 101]
+                    },
+                    {
+                        name: "故障设备",
+                        type: "line",
+                        data: [120, 132, 110]
+                    },
+                    {
+                        name: "维修设备",
+                        type: "line",
+                        data: [120, 132, 101]
+                    }
+                ]
+            },
+            chartSettings: {
+                legend: {
+                    data: ["正常设备", "故障设备", "维修设备"]
+                },
+                xAxis: {
+                    type: "category",
+                    data: ["1", "2", "3"]
+                },
+                yAxis: {
+                    type: "value"
+                },
+                series: [
+                    {
+                        name: "正常设备",
+                        type: "line",
+                        data: [120, 132, 101]
+                    },
+                    {
+                        name: "故障设备",
+                        type: "line",
+                        data: [120, 132, 110]
+                    },
+                    {
+                        name: "维修设备",
+                        type: "line",
+                        data: [120, 132, 101]
+                    }
+                ]
+            },
             currentPage: 1,
             time: 60,
             options: [
@@ -114,7 +213,7 @@ export default {
                 }
             ],
             value: [0, 1, 2, 3, 4],
-            more:false,
+            more: false,
 
             msg: "Hello Vue.",
             msg1: "",
@@ -143,11 +242,38 @@ export default {
             this.currentPage = val.query.position || 0;
         }
     },
+    filters: {
+        timeFormat(timeStamp, detail) {
+            if (timeStamp <= 0) {
+                return "--";
+            }
+            let date = new Date(timeStamp * 1000);
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let second = date.getSeconds();
+            // xx/xx
+            if (detail === 1) {
+                month = month < 10 ? "0" + month : month;
+                day = day < 10 ? "0" + day : day;
+                return `${month}/${day}`;
+            }
+        }
+    },
     mounted() {
         this.currentPage = this.$route.query.position || 0;
         this.addList = this.options;
         this.checkAddList = this.options;
         this.forEvery();
+        this.initEChart(1);
+        console.log(this.$router,this.$route,"path")
+    },
+    computed:{
+        today:function () {
+            return parseInt(new Date().getTime() / 1000, 10)
+        }
     },
     methods: {
         runTime() {
@@ -230,21 +356,18 @@ export default {
             this.forevery = this.options.every(item => item.tof);
             console.log(this.forevery, "forevery");
         },
-        openText(){
-            if(this.more==false){
+        openText() {
+            if (this.more == false) {
                 // this.$refs.textout.style.overflow= "scroll";
-                this.$refs.textout.style.height= "auto";
-                this.more = true
-
-            }else{
+                this.$refs.textout.style.height = "auto";
+                this.more = true;
+            } else {
                 // this.$refs.textout.style.overflow= "hidden";
-                this.$refs.textout.style.height= "80px";
+                this.$refs.textout.style.height = "80px";
 
-                this.more = false
+                this.more = false;
             }
             // this.$refs.textout.style.overflow= "visible";
-
-
         },
 
         // currentPage4
@@ -270,8 +393,129 @@ export default {
             });
             this.msg3 = this.$refs.msgDiv.innerHTML;
             //在回调中获取更新后的 DOM
-        }
+        },
         //currentpage 6  vuechat
+        initEChart(index) {
+            var aaa = [
+                [12, 13, 14],
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                [2017, 2018]
+            ];
+            let today = this.today;
+            let recentDay = [];
+            for (let i = 0; i < 12; i++) {
+                recentDay.unshift(this.$options.filters.timeFormat(today, 1));
+                today -= 3600 * 24;
+            }
+            var randomList1 = [];
+            var randomList2 = [];
+            var randomList3 = [];
+            for (let i = 0; i < 12; i++) {
+                randomList1.push(Math.floor(Math.random() * 100 + 1));
+                randomList2.push(Math.floor(Math.random() * 100 + 1));
+                randomList3.push(Math.floor(Math.random() * 100 + 1));
+            }
+            var xDataDetail = [
+                recentDay,
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                [2017, 2018]
+            ];
+            var yDataDetail1 = [
+                randomList1,
+                randomList1,
+                [
+                    Math.floor(Math.random() * 100 + 1),
+                    Math.floor(Math.random() * 100 + 1)
+                ]
+            ];
+            var yDataDetail2 = [
+                randomList2,
+                randomList2,
+                [
+                    Math.floor(Math.random() * 100 + 1),
+                    Math.floor(Math.random() * 100 + 1)
+                ]
+            ];
+            var yDataDetail3 = [
+                randomList3,
+                randomList3,
+                [
+                    Math.floor(Math.random() * 100 + 1),
+                    Math.floor(Math.random() * 100 + 1)
+                ]
+            ];
+            var status = ["日", "月", "年"];
+            var colors = ["#8E9AAD", "#d14a61", "#675bba"];
+            this.$nextTick(() => {
+                // console.log(this.$refs.myEchart, "aaaaa");
+                this.chart = echarts.init(this.$refs.myEchart);
+                let bbb = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                this.chart.setOption({
+                    legend: {
+                        data: ["正常设备", "故障设备", "维修设备"]
+                    },
+                    xAxis: {
+                        type: "category",
+                        data: xDataDetail[index - 1],
+                        boundaryGap: false,
+                        axisLine: {
+                            lineStyle: {
+                                color: colors[0]
+                            }
+                        },
+                        axisPointer: {
+                            label: {
+                                formatter: function(p) {
+                                    return p.value + status[index - 1];
+                                }
+                            }
+                        }
+                    },
+
+                    tooltip: {
+                        trigger: "axis"
+                    },
+                    yAxis: {
+                        type: "value",
+                        axisLine: {
+                            lineStyle: {
+                                color: "#8E9AAD"
+                            }
+                        }
+                    },
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    series: [
+                        {
+                            name: "正常设备",
+                            type: "line",
+                            data: yDataDetail1[index - 1],
+                            symbol: "none",
+                            color: "#34D5B5"
+                        },
+                        {
+                            name: "故障设备",
+                            type: "line",
+                            data: yDataDetail2[index - 1],
+                            symbol: "none",
+                            color: "#EF5451"
+                        },
+                        {
+                            name: "维修设备",
+                            type: "line",
+                            data: yDataDetail3[index - 1],
+                            symbol: "none",
+                            color: "#FFA451"
+                        }
+                    ]
+                });
+                window.onresize = this.chart.resize;
+            });
+        },
+        chartType(index) {
+            this.initEChart(index);
+        }
     }
 };
 </script>
@@ -329,11 +573,11 @@ export default {
         margin-left: 300px;
     }
 }
-.item-list.aaa{
+.item-list.aaa {
     height: 80px;
     overflow: hidden;
 }
-.more{
+.more {
     cursor: pointer;
     background: #000;
     color: #fff;
@@ -390,12 +634,12 @@ export default {
         }
     }
 }
-.test-vertical-align{
+.test-vertical-align {
     height: 40px;
     background: #e26829;
     vertical-align: bottom;
     display: inline-block;
-    span{
+    span {
         display: inline-block;
         vertical-align: bottom;
     }

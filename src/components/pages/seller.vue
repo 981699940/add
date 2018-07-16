@@ -43,6 +43,10 @@ export default {
             //     audio.pause();
             // }
             let audi = this.$refs.player;
+            console.log(audi,"bbbb");
+            // this.$nextTick(() => {
+            //     console.log(audi,"ccccc");
+            // });
             //等同于 document.querySelector("#audio")
             //document.getElementsByClassName(name)[0] 因为class不唯一 返回的是数组 这里name是变量
             //当ref和v-for一起使用时,获取到的引用是一个数组
