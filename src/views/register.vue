@@ -31,13 +31,16 @@
 
                 </div>
                 <div class="login-forget">
-                    <div class="absolute">
+                    <!-- <div class="absolute">
                         <input type="checkbox">
                     </div>
 
                     <span class="forget">我已经阅读并同意
                         <a target="_blank" href="http://static.innotick.com/smartwork/file/a34010326904b2366cc857c8261277b191d4f1cc53cc35b5fa489e31ff22a50e.docx">《业内人平台协议》</a>
-                    </span>
+                    </span> -->
+                     <input class="checkbox" type="checkbox" id="checkbox">
+                    <label class="forget" for="checkbox">我已经阅读并同意</label>
+                    <a target="_blank" href="http://static.innotick.com/smartwork/file/a34010326904b2366cc857c8261277b191d4f1cc53cc35b5fa489e31ff22a50e.docx">《业内人平台协议》</a>
                 </div>
 
             </div>
@@ -85,11 +88,14 @@ export default {
         width: 100%;
         height: 70px;
         display: flex;
+        flex: 0 0 100%;
+        min-width: 1130px;
         align-items: center;
         .header-content {
             display: flex;
             margin: 0 auto;
-            min-width: 1130px;
+            width: 1130px;
+            padding: 0 20px;
             justify-content: space-between;
             .brand {
                 width: 121px;
@@ -104,16 +110,17 @@ export default {
         }
     }
     .login-container {
-        widows: 100%;
+        width: 100%;
         padding-top: 80px;
         background: #f1f4f8;
         // height: 765px;
         min-height: 765px;
         height: 75vh;
+        min-width: 1130px;
         .container-content {
             margin: 0 auto;
             width: 500px;
-            height: 550px;
+            // height: 550px;
             padding: 40px;
             background: #fff;
             .login-title {
@@ -195,26 +202,21 @@ export default {
                 margin-top: 20px;
                 justify-content: center;
                 align-items: center;
-                .absolute {
-                    position: relative;
-                    width: 0;
-                    height: 0;
-                    top: -5px;
-                    input{
-                        position: absolute;
-                        width: 130px;
-
-                    }
+                .checkbox {
+                    vertical-align: middle;
                 }
                 .forget {
                     font-size: 14px;
                     color: #7f8d9a;
-                    margin-left: 20px;
-                    a {
-                        font-size: 14px;
-                        color: #23abe2;
-                        cursor: pointer;
-                    }
+                    margin-left: 6px;
+                    position: relative;
+                    vertical-align: middle;
+                }
+                a {
+                    font-size: 14px;
+                    color: #23abe2;
+                    cursor: pointer;
+                    vertical-align: middle;
                 }
             }
             .login-other {
@@ -242,14 +244,14 @@ export default {
         padding-top: 70px;
         padding-bottom: 40px;
         height: 245px;
-        // position: fixed;
-        // bottom: 0;
-        // left: 0;
-        // right: 0;
-
+        min-width: 1130px;
         .footer-content {
             width: 1130px;
+            padding: 0 20px;
             margin: 0 auto;
+            @media screen and (max-width: 1150px) {
+                width: 100%;
+            }
             .footer-top {
                 display: flex;
                 align-items: center;
@@ -272,6 +274,10 @@ export default {
                 .text {
                     font-size: 14px;
                     color: #9da7af;
+                    span {
+                        font-size: 14px;
+                        margin-left: 20px;
+                    }
                 }
                 .button {
                     span {

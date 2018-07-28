@@ -1,12 +1,23 @@
 <template>
     <div class="center">
+        aa
     </div>
 </template>
 <script>
 export default {
     data() {
       return {};
-    }
+    },
+    mounted(){
+        var aa =document.getElementsByClassName('center')[0];
+        // console.log(aa.childNodes[0].nodeValue,"chi_nodeValue")
+        // console.log(aa.firstChild.nodeValue,"fir_nodeValue")
+        // console.log(aa.innerHTML,"innerHTML")
+        // 上面3条效果相同
+        console.log(aa.parentNode)
+        
+    },
+
 };
 </script>
 <style>

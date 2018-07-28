@@ -15,7 +15,7 @@
         <div class="choosse-city " :class="{active:flag}">
             <div class="selected-city" @click.stop="flag = !flag">
                 <label for="aaa">{{citys}}</label>
-                <input type="checkbox" id="aaa" :checked="isTitleChecked()" @change.stop="changeAllInput($event)" />
+                <input type="checkbox" id="aaa" :checked="isTitleChecked()" @change.stop="changeAllInput" />
             </div>
             <div class="option-city">
                 <div class="option-wrapper">
@@ -75,6 +75,7 @@ export default {
 
         },
         changeAllInput(event){
+            console.log(event,"event")
             if(event.target.checked === true){
                 this.list1.forEach(item=>this.kongsz.indexOf(item.id)== -1 && this.kongsz.push(item.id))
             }

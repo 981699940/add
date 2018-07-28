@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>{{this.$route.path}}{{this.$route.params}} {{this.$route.query}} <span class="high-light">路由传参 query</span> </div>
+        <div>{{$route.path}}{{this.$route.params}} {{$route.query}} <span class="high-light">路由传参 query</span> </div>
         <div class="flex">
             <div class="test-flex" v-for="(item,index) in list" :key="item.id">
                 <span :class="{active: currentId == item.id}" @click.stop="tabToPage(item,index,$event)">{{item.name}}</span>

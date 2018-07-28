@@ -28,3 +28,7 @@ input, button, textarea {
 ul, li {
     list-style: none;
 }
+.el-dropdown-menu__item{
+    padding:0px !important; 
+
+}

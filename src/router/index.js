@@ -13,8 +13,8 @@ import ToLeft from "../components/pages/to-left";
 import ToCenter from "../components/pages/to-center";
 import Test from "@/views/test";
 import Page from "@/views/page";
-import Path from "@/components/path/path"
-import Tree from "@/components/tree-select"
+import Path from "@/components/path/path";
+import Tree from "@/components/tree-select";
 
 Vue.use(Router);
 
@@ -40,8 +40,7 @@ export default new Router({
     {
       path: "/test/:id",
       name: "Test",
-      component: Path,
-        
+      component: Path
     },
     { path: "/intro", component: Intro },
     { path: "/login", component: Login },
@@ -49,20 +48,6 @@ export default new Router({
     { path: "/layout", component: Layout },
     { path: "/test", component: Test },
     { path: "/page", component: Page },
-    {path:'/tree',component:Tree},
+    { path: "/tree", component: Tree }
   ]
 });
-//   children: [
-//     {
-//       path: "left",
-//       component: ToLeft
-//     },
-//     {
-//         path: "center",
-//         component: ToCenter
-//       },
-//       {
-//         path: "right",
-//         component: ToRight
-//       }
-//   ]
