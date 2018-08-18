@@ -13,6 +13,7 @@ import ToLeft from "../components/pages/to-left";
 import ToCenter from "../components/pages/to-center";
 import Test from "@/views/test";
 import Page from "@/views/page";
+import ActionSheet from "@/views/actionsheet";
 import Path from "@/components/path/path";
 import Tree from "@/components/tree-select";
 
@@ -48,6 +49,7 @@ export default new Router({
     { path: "/layout", component: Layout },
     { path: "/test", component: Test },
     { path: "/page", component: Page },
-    { path: "/tree", component: Tree }
+    { path: "/tree", component: Tree },
+    { path: "/actionsheet", component: ActionSheet }
   ]
 });

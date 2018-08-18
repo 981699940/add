@@ -1,6 +1,8 @@
 <template>
     <div class="center">
         aa
+        <i class="fas fa-paper-plane"></i>
+        <font-awesome-icon icon="coffee" style="color:yellow"/>
     </div>
 </template>
 <script>

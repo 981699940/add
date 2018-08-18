@@ -6,9 +6,16 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VeLine from 'v-charts/lib/line'
-
 import '../src/assets/style/base.css';
 import '../src/assets/style/animate.css';
+
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+library.add(faCoffee)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 // import VCharts from 'v-charts' 
 // Vue.use(VCharts) //  全局引入
 Vue.use(ElementUI);
