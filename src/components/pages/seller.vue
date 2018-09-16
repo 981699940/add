@@ -64,7 +64,7 @@ export default {
             this.tiem = audio.currentTime;
         },
         takeBus(event) {
-            console.log(event.target, "aaa");
+            console.log(event.target, "bus-star 打印车头标签");
             Bus.$emit("getTarget", event.target);
             Bus.$emit("say-hello", "world");
         }

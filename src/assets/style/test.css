@@ -1,0 +1,117 @@
+.app {
+        display: block;
+
+        padding: 5px 20px 20px 20px;
+        min-width: 940px;
+        font-size: 18px;
+        background-color: #fff;
+        font-family: PingFang SC, PingFangSC-Semibold, Helvetica Neue, Helvetica,
+            Nimbus Sans L, Arial, Liberation Sans, Hiragino Sans GB,
+            Source Han Sans CN, Source Han Sans SC, Microsoft YaHei, SimHei,
+            sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .border {
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+    }
+
+    table {
+        border: none;
+        table-layout: fixed;
+        word-break: break-all;
+    }
+
+    /* width: 110px; */
+    th {
+        text-align: center;
+        padding: 5px;
+        height: 40px;
+        border-top: 1px solid #000;
+        border-left: 1px solid #000;
+    }
+
+    tr td:last-child {
+        border-right: 1px solid #000;
+    }
+
+    tr:last-child th {
+        border-bottom: 1px solid #000;
+    }
+
+    tr:last-child td {
+        border-bottom: 1px solid #000;
+    }
+
+    .bd-bt {
+        border-bottom: 1px solid #000;
+    }
+
+    td.half {
+        width: 80px;
+    }
+
+    td {
+        width: 100px;
+        text-align: center;
+        border-top: 1px solid #000;
+        border-left: 1px solid #000;
+    }
+
+    .title {
+        /* text-orientation:vertical-lr; */
+        word-wrap: break-word;
+        width: 30px;
+        text-align: center;
+        font-size: 21px;
+    }
+
+    .wd-110 {
+        width: 110px;
+    }
+
+    .wd-55 {
+        width: 55px;
+    }
+
+    .ht-80 {
+        height: 80px;
+    }
+    .ht-117 {
+        height: 117px;
+    }
+
+    div.wrapper {
+        width: 100%;
+        /* height: 100%; */
+        position: relative;
+    }
+
+    .fx {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    span {
+        color: #000;
+    }
+
+    div.bottom {
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+    }
+    span {
+        vertical-align: middle;
+    }
+    span.write {
+        display: inline-block;
+        width: 80px;
+        height: 22px;
+        font-size: 12px;
+    }

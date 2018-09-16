@@ -16,13 +16,18 @@ import Page from "@/views/page";
 import ActionSheet from "@/views/actionsheet";
 import Path from "@/components/path/path";
 import Tree from "@/components/tree-select";
+import PicCheck from '@/views/pic-check'
+import CountTest from '@/views/count-test'
+import Url from '@/views/url'
+import Scroll from '@/views/test-scroll'
+
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
   routes: [
-    { path: "/", redirect: { path: "/index" } },
+    { path: "/", redirect: { path: "/pic" } },
     {
       path: "/index",
       redirect: { path: "/index/goods" },
@@ -50,6 +55,10 @@ export default new Router({
     { path: "/test", component: Test },
     { path: "/page", component: Page },
     { path: "/tree", component: Tree },
-    { path: "/actionsheet", component: ActionSheet }
+    { path: "/actionsheet", component: ActionSheet },
+    { path: "/pic", component: PicCheck },
+    { path: "/count", component: CountTest },
+    { path: "/url", component: Url },
+    { path: "/scroll", component: Scroll },
   ]
 });

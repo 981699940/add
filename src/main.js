@@ -8,8 +8,24 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VeLine from 'v-charts/lib/line'
 import '../src/assets/style/base.css';
 import '../src/assets/style/animate.css';
+import VueMeta from 'vue-meta'
+import VueHead from 'vue-head'
 
 
+import VuePreview from 'vue-preview'
+// Vue.use(VuePreview)
+Vue.use(VuePreview, {
+    mainClass: 'pswp--minimal--dark',
+    barsSize: {top: 0, bottom: 0},
+    captionEl: false,
+    fullscreenEl: false,
+    shareEl: false,
+    bgOpacity: 0.85,
+    tapToClose: true,
+    tapToToggleControls: false
+  })
+Vue.use(VueMeta)
+Vue.use(VueHead)
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
