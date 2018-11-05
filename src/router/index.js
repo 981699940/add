@@ -17,6 +17,8 @@ import ActionSheet from "@/views/actionsheet";
 import Path from "@/components/path/path";
 import Tree from "@/components/tree-select";
 
+import Content from "@/views/content";
+
 Vue.use(Router);
 
 export default new Router({
@@ -50,6 +52,7 @@ export default new Router({
     { path: "/test", component: Test },
     { path: "/page", component: Page },
     { path: "/tree", component: Tree },
-    { path: "/actionsheet", component: ActionSheet }
+    { path: "/actionsheet", component: ActionSheet },
+      { path: "/content", component: Content }
   ]
 });
