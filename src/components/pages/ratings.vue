@@ -19,10 +19,10 @@ import Bus from '../bus.js'
 export default {
     created(){
         Bus.$on('getTarget',target=>{
-            console.log(target,"target")
+            console.log(target,"bus end 打印车头标签")
         }),
         Bus.$on('say-hello',arg=>{
-            console.log('hello'+arg)
+            console.log('hello '+arg)
         })
     },
     data() {
